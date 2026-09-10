@@ -1,0 +1,1083 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+<title>Diabetes Mellitus & DKA — Dr Badawy Pediatrics</title>
+<meta name="description" content="Interactive pediatric study map: Diabetes Mellitus & DKA — Dr Mohammed Badawy">
+<link rel="manifest" href="manifest.json">
+<meta name="theme-color" content="#16324F" id="themeColorMeta">
+<link rel="icon" href="icon-192.png">
+<link rel="apple-touch-icon" href="icon-192.png">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+<meta name="apple-mobile-web-app-title" content="DM & DKA Map">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,500;9..144,600;9..144,700&family=Inter:wght@400;500;600;700;800&family=JetBrains+Mono:wght@500&display=swap" rel="stylesheet">
+<style>
+/* ============ DESIGN TOKENS ============ */
+:root{
+  --bg:#F5F6F8; --surface:#FFFFFF; --surface-2:#FBFBFC;
+  --ink:#151A24; --ink-soft:#2B3242; --muted:#5B6472; --faint:#8B93A1;
+  --line:#E3E6EB; --line-strong:#CBD1DA;
+
+  --navy:#16324F; --navy-ink:#0E2338; --navy-bg:#EAF1F7;
+  --gold:#9C6B08; --gold-bg:#FBF3DE; --gold-line:#EAD9A8;
+  --teal:#0E6E63; --teal-bg:#E6F4F1;
+  --red:#AD2B22; --red-bg:#FBEAE8; --red-line:#F0C6C0;
+  --violet:#5B3F8C; --violet-bg:#F0EBF9;
+
+  --radius-sm:8px; --radius-md:14px; --radius-lg:20px;
+  --shadow-sm:0 1px 2px rgba(15,23,42,.05);
+  --shadow-md:0 8px 24px rgba(16,24,40,.08);
+
+  --serif:'Fraunces',Georgia,'Times New Roman',serif;
+  --sans:'Inter',system-ui,-apple-system,'Segoe UI',sans-serif;
+  --mono:'JetBrains Mono',ui-monospace,monospace;
+
+  --sidebar-w:280px; --topbar-h:60px; --bottomnav-h:60px;
+}
+
+[data-theme="dark"]{
+  --bg:#12151C; --surface:#191D26; --surface-2:#1F242F;
+  --ink:#EDEFF3; --ink-soft:#D6DAE3; --muted:#93A0B4; --faint:#6B7688;
+  --line:#2A3038; --line-strong:#3A4250;
+
+  --navy:#5B9BD5; --navy-ink:#EDEFF3; --navy-bg:#1D2C3E;
+  --gold:#E0B04D; --gold-bg:#2E2712; --gold-line:#4A3E1E;
+  --teal:#4FBFAE; --teal-bg:#132824;
+  --red:#E68078; --red-bg:#2E1717; --red-line:#4A2323;
+  --violet:#B39BE0; --violet-bg:#241C36;
+
+  --shadow-sm:0 1px 2px rgba(0,0,0,.3);
+  --shadow-md:0 8px 24px rgba(0,0,0,.4);
+}
+[data-theme="dark"] .crest-badge{background:var(--gold);color:var(--navy-ink)}
+[data-theme="dark"] .card{background:var(--surface-2)}
+[data-theme="dark"] .flow span.node{background:var(--surface);color:var(--ink-soft)}
+[data-theme="dark"] .answer{background:var(--surface)}
+[data-theme="dark"] .quiz-opt,[data-theme="dark"] .case-choice{background:var(--surface)}
+[data-theme="dark"] .numbers{background:#05070B}
+[data-theme="dark"] .fc-card{background:var(--surface-2);color:var(--ink)}
+[data-theme="dark"] .fc-card.back{background:var(--navy-bg)}
+[data-theme="dark"] ::selection{background:var(--gold-bg);color:var(--ink)}
+
+*{box-sizing:border-box}
+html{scroll-behavior:smooth}
+@media(prefers-reduced-motion:reduce){html{scroll-behavior:auto}*{animation-duration:.001ms!important;transition-duration:.001ms!important}}
+body{margin:0;background:var(--bg);color:var(--ink);font-family:var(--sans);line-height:1.5;
+  -webkit-font-smoothing:antialiased;transition:background-color .25s ease,color .25s ease}
+h1,h2,h3{font-family:var(--serif);font-weight:600;color:var(--navy-ink);margin:0}
+a{color:inherit}
+button,input{font:inherit;color:inherit}
+:focus-visible{outline:2.5px solid var(--gold);outline-offset:2px;border-radius:4px}
+::selection{background:var(--gold-bg);color:var(--navy-ink)}
+
+.visually-hidden{position:absolute;width:1px;height:1px;overflow:hidden;clip:rect(0,0,0,0);white-space:nowrap}
+
+/* ============ APP SHELL ============ */
+.app{display:flex;min-height:100vh}
+
+/* ---- Sidebar (desktop) ---- */
+.sidebar{width:var(--sidebar-w);flex:none;background:var(--surface);border-right:1px solid var(--line);
+  display:flex;flex-direction:column;position:sticky;top:0;height:100vh;overflow-y:auto}
+.brandmark{padding:26px 24px 18px;border-bottom:1px solid var(--line)}
+.brandmark .crest{display:flex;align-items:center;gap:10px;margin-bottom:14px}
+.crest-badge{width:34px;height:34px;border-radius:9px;background:var(--navy);color:#fff;
+  display:flex;align-items:center;justify-content:center;font-family:var(--serif);font-weight:700;font-size:15px;flex:none}
+.crest-name{font-family:var(--serif);font-weight:600;font-size:14.5px;color:var(--navy-ink);line-height:1.25}
+.crest-name span{display:block;font-family:var(--sans);font-weight:600;font-size:10.5px;letter-spacing:.06em;color:var(--muted);margin-top:1px}
+.brandmark h1{font-size:19px;line-height:1.3}
+.brandmark .topic-tag{display:inline-flex;align-items:center;gap:6px;margin-top:10px;font-size:11.5px;font-weight:600;
+  color:var(--red);background:var(--red-bg);border:1px solid var(--red-line);padding:4px 9px;border-radius:100px}
+.topic-tag i{width:6px;height:6px;border-radius:50%;background:var(--red)}
+
+.progress-widget{padding:18px 24px;border-bottom:1px solid var(--line)}
+.progress-widget .pw-row{display:flex;align-items:center;gap:12px}
+.ring{width:52px;height:52px;flex:none}
+.pw-stats{font-size:12.5px;color:var(--muted)}
+.pw-stats b{display:block;font-size:15px;color:var(--ink);font-weight:700;font-family:var(--sans)}
+.pw-meta{display:flex;justify-content:space-between;margin-top:12px;font-size:11.5px;color:var(--faint)}
+.pw-meta b{color:var(--muted);font-weight:600}
+
+.toc{padding:14px 14px 20px;flex:1}
+.toc-label{font-size:11px;font-weight:700;letter-spacing:.04em;color:var(--faint);padding:8px 10px 6px}
+.toc-link{display:flex;align-items:center;gap:10px;padding:9px 10px;border-radius:9px;font-size:13.5px;
+  font-weight:500;color:var(--ink-soft);text-decoration:none;cursor:pointer;border:none;background:none;width:100%;text-align:left}
+.toc-link:hover{background:var(--surface-2)}
+.toc-link.active{background:var(--navy-bg);color:var(--navy-ink);font-weight:700}
+.toc-dot{width:7px;height:7px;border-radius:50%;flex:none;background:var(--line-strong)}
+.toc-link.done .toc-dot{background:var(--teal)}
+.toc-link.active .toc-dot{background:var(--navy)}
+
+.mode-switch{padding:14px 24px 22px;border-top:1px solid var(--line)}
+.mode-switch .toc-label{padding:0 0 8px}
+.mode-grid{display:grid;grid-template-columns:1fr 1fr;gap:8px}
+.mode-btn{border:1px solid var(--line);background:var(--surface-2);border-radius:10px;padding:9px 8px;
+  font-size:12px;font-weight:700;color:var(--ink-soft);cursor:pointer;text-align:center;line-height:1.3}
+.mode-btn:hover{border-color:var(--line-strong)}
+.mode-btn.active{background:var(--navy);border-color:var(--navy);color:#fff}
+
+/* ---- Main column ---- */
+.main-col{flex:1;min-width:0;display:flex;flex-direction:column}
+.topbar{display:none}
+
+main{max-width:880px;margin:0 auto;padding:36px 32px 90px;width:100%}
+.pagehead{margin-bottom:20px}
+.pagehead .eyebrow{font-size:12.5px;font-weight:700;color:var(--gold);margin-bottom:6px}
+.pagehead h2.pt{font-size:clamp(26px,3.4vw,34px);letter-spacing:-.01em}
+.pagehead p{color:var(--muted);font-size:14.5px;margin-top:6px;max-width:60ch}
+
+.search-row{display:flex;gap:10px;margin:18px 0 6px}
+.search-wrap{position:relative;flex:1}
+.search-wrap svg{position:absolute;left:13px;top:50%;transform:translateY(-50%);opacity:.45}
+#search{width:100%;padding:12px 14px 12px 38px;border:1px solid var(--line);border-radius:11px;background:var(--surface);font-size:14px}
+#search:focus{border-color:var(--navy)}
+.icon-btn{border:1px solid var(--line);background:var(--surface);border-radius:11px;width:44px;height:44px;
+  display:flex;align-items:center;justify-content:center;cursor:pointer;flex:none}
+.icon-btn:hover{border-color:var(--line-strong);background:var(--surface-2)}
+.icon-btn.on{background:var(--navy);border-color:var(--navy);color:#fff}
+
+.hero-note{background:var(--navy-bg);border:1px solid #d6e4ef;border-radius:var(--radius-md);padding:14px 18px;
+  margin:16px 0 26px;font-size:13.5px;color:var(--navy-ink)}
+.hero-note b{font-weight:700}
+
+/* ---- Sections ---- */
+.section{background:var(--surface);border:1px solid var(--line);border-radius:var(--radius-lg);margin:0 0 16px;overflow:hidden}
+.section-head{display:flex;align-items:flex-start;justify-content:space-between;gap:14px;padding:20px 22px;cursor:pointer}
+.sh-left{display:flex;gap:14px;align-items:flex-start}
+.sh-index{font-family:var(--serif);font-size:22px;font-weight:600;color:var(--line-strong);flex:none;line-height:1.1;padding-top:1px}
+.section.red .sh-index{color:var(--red)}.section.teal .sh-index{color:var(--teal)}
+.section.purple .sh-index{color:var(--violet)}.section.amber .sh-index{color:var(--gold)}
+.section h2{font-size:19px}
+.section .sh-sub{color:var(--muted);font-size:12.5px;margin-top:4px}
+.sh-right{display:flex;align-items:center;gap:10px;flex:none}
+.mark-done{width:24px;height:24px;border-radius:7px;border:1.5px solid var(--line-strong);background:var(--surface);
+  cursor:pointer;display:flex;align-items:center;justify-content:center;flex:none}
+.mark-done.done{background:var(--teal);border-color:var(--teal);color:#fff}
+.chev{width:18px;height:18px;color:var(--faint);flex:none;transition:transform .18s ease}
+.section.collapsed .chev{transform:rotate(-90deg)}
+.content{padding:0 22px 22px}
+.section.collapsed .content{display:none}
+
+.grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(240px,1fr));gap:12px}
+.card{border:1px solid var(--line);border-radius:var(--radius-md);padding:16px 17px;background:var(--surface-2)}
+.card h3{font-family:var(--sans);margin:0 0 9px;font-size:13.5px;font-weight:700;color:var(--ink-soft);
+  display:flex;align-items:center;gap:8px}
+.card h3 .dot{width:7px;height:7px;border-radius:50%;background:var(--navy);flex:none}
+.card p,.card li{color:var(--muted);line-height:1.6;font-size:13.5px}
+.card ul{margin:0;padding-left:18px}
+.card li{margin-bottom:3px}
+
+.kv{display:grid;grid-template-columns:112px 1fr;gap:8px;padding:8px 0;border-top:1px solid var(--line)}
+.kv:first-of-type{border-top:0}
+.key{font-size:10.5px;font-weight:700;text-transform:uppercase;color:var(--faint);letter-spacing:.05em;padding-top:1px}
+.val{font-weight:600;color:var(--ink);font-size:13.5px}
+
+.tag{display:inline-block;padding:4px 10px;border-radius:100px;font-size:11px;font-weight:700;margin:2px 4px 2px 0}
+.tag.blue{background:var(--navy-bg);color:var(--navy)}.tag.redtag{background:var(--red-bg);color:var(--red)}
+.tag.teal{background:var(--teal-bg);color:var(--teal)}.tag.purple{background:var(--violet-bg);color:var(--violet)}
+.tag.amber{background:var(--gold-bg);color:var(--gold)}
+
+.flow{border-radius:var(--radius-md);padding:18px 20px;background:var(--surface-2);border:1px solid var(--line);text-align:center}
+.flow b.flow-title{display:block;font-family:var(--sans);font-size:12px;font-weight:700;color:var(--muted);
+  text-align:left;margin-bottom:10px}
+.flow span.node{display:inline-block;background:#fff;border:1px solid var(--line);border-radius:10px;
+  padding:9px 13px;margin:4px;font-weight:600;font-size:13px;color:var(--ink-soft)}
+.flow span.arrow{color:var(--line-strong);font-size:16px;font-weight:700;padding:0 2px}
+.section.red .flow{background:var(--red-bg);border-color:var(--red-line)}
+
+.emergency{background:var(--red-bg);border-color:var(--red-line)!important}
+.numbers{background:var(--navy-ink);color:#fff;border-radius:var(--radius-md);padding:16px}
+.numbers b{font-family:var(--sans)}
+.numbers .num{display:inline-block;padding:9px 13px;margin:4px;background:rgba(255,255,255,.09);
+  border-radius:9px;font-size:13px;font-weight:600;font-family:var(--mono);letter-spacing:-.02em}
+
+.active-recall .val,.active-recall .answer{filter:blur(6px);cursor:pointer;user-select:none;transition:filter .15s ease}
+.active-recall .val.revealed,.active-recall .answer.revealed{filter:none}
+.active-recall .val:hover,.active-recall .answer:hover{filter:blur(3px)}
+.answer{background:#fff;border:1px solid var(--line);border-radius:9px;padding:9px 11px;margin-top:6px;font-size:13.5px}
+
+/* ---- Case simulator ---- */
+.case-step{display:none}
+.case-step.active{display:block}
+.case-progress{display:flex;gap:5px;margin-bottom:16px}
+.case-progress i{flex:1;height:4px;border-radius:3px;background:var(--line)}
+.case-progress i.pass{background:var(--teal)}
+.case-progress i.now{background:var(--navy)}
+.case-prompt{font-size:15.5px;font-weight:600;color:var(--ink-soft);margin-bottom:14px;font-family:var(--serif)}
+.case-choices{display:grid;gap:9px}
+.case-choice{border:1.5px solid var(--line);background:var(--surface);border-radius:11px;padding:12px 14px;
+  text-align:left;cursor:pointer;font-size:13.5px;font-weight:500;color:var(--ink-soft)}
+.case-choice:hover{border-color:var(--navy)}
+.case-choice.correct{border-color:var(--teal);background:var(--teal-bg);color:var(--teal);font-weight:700}
+.case-choice.wrong{border-color:var(--red-line);background:var(--red-bg);color:var(--red)}
+.case-choice[disabled]{cursor:default}
+.case-feedback{margin-top:12px;font-size:13px;color:var(--muted);background:var(--surface-2);border-radius:10px;padding:11px 13px;display:none}
+.case-feedback.show{display:block}
+.case-nav{display:flex;justify-content:space-between;margin-top:18px}
+.btn{border:1px solid var(--line);background:var(--surface);border-radius:10px;padding:10px 16px;
+  font-weight:700;font-size:13px;cursor:pointer;color:var(--ink-soft)}
+.btn.primary{background:var(--navy);border-color:var(--navy);color:#fff}
+.btn[disabled]{opacity:.4;cursor:default}
+.case-done{text-align:center;padding:30px 10px}
+.case-done h3{font-size:20px;margin-bottom:8px}
+
+/* ---- Suggested enhancements ---- */
+.suggested{border:1.5px dashed var(--line-strong);background:var(--surface-2)}
+.suggested .section-head{cursor:pointer}
+.suggested .flag{display:inline-block;font-size:10.5px;font-weight:700;color:var(--gold);background:var(--gold-bg);
+  border:1px solid var(--gold-line);padding:3px 9px;border-radius:100px;margin-top:6px}
+.suggested .card{background:#fff}
+
+/* ---- Footer ---- */
+.footer{text-align:center;color:var(--faint);font-size:12.5px;margin-top:34px;padding-top:20px;border-top:1px solid var(--line)}
+.footer .fname{font-family:var(--serif);color:var(--navy-ink);font-weight:600;font-size:14px;margin-bottom:3px}
+
+/* ---- Quiz modal ---- */
+.modal-backdrop{position:fixed;inset:0;background:rgba(14,20,32,.5);display:none;align-items:center;justify-content:center;z-index:60;padding:16px}
+.modal-backdrop.show{display:flex}
+.modal{background:#fff;border-radius:var(--radius-lg);max-width:520px;width:100%;max-height:88vh;overflow-y:auto;padding:26px 24px}
+.modal-head{display:flex;justify-content:space-between;align-items:center;margin-bottom:16px}
+.modal-head h2{font-size:18px}
+.modal-close{border:none;background:var(--surface-2);width:32px;height:32px;border-radius:9px;cursor:pointer;display:flex;align-items:center;justify-content:center}
+.quiz-meta{display:flex;justify-content:space-between;font-size:12px;color:var(--muted);margin-bottom:14px}
+.quiz-bar{height:5px;background:var(--line);border-radius:4px;overflow:hidden;margin-bottom:20px}
+.quiz-bar i{display:block;height:100%;background:var(--navy)}
+.quiz-q{font-family:var(--serif);font-size:16.5px;font-weight:600;margin-bottom:16px;color:var(--ink-soft)}
+.quiz-opt{display:block;width:100%;text-align:left;border:1.5px solid var(--line);border-radius:11px;
+  padding:12px 14px;margin-bottom:9px;background:var(--surface);cursor:pointer;font-size:13.5px;font-weight:500}
+.quiz-opt:hover{border-color:var(--navy)}
+.quiz-opt.correct{border-color:var(--teal);background:var(--teal-bg);color:var(--teal);font-weight:700}
+.quiz-opt.wrong{border-color:var(--red-line);background:var(--red-bg);color:var(--red)}
+.quiz-explain{font-size:12.5px;color:var(--muted);background:var(--surface-2);border-radius:9px;padding:11px 13px;margin:8px 0 4px;display:none}
+.quiz-explain.show{display:block}
+.quiz-result{text-align:center;padding:20px 6px}
+.quiz-result .score{font-family:var(--serif);font-size:44px;color:var(--navy-ink);margin:6px 0}
+
+/* ---- Flashcards ---- */
+.fc-meta{display:flex;justify-content:space-between;font-size:12px;color:var(--muted);margin-bottom:12px}
+.fc-stage{perspective:1200px;height:260px;margin-bottom:16px}
+.fc-card{position:relative;width:100%;height:100%;cursor:pointer}
+.fc-inner{position:relative;width:100%;height:100%;transition:transform .45s cubic-bezier(.2,.8,.2,1);
+  transform-style:preserve-3d}
+.fc-card.flipped .fc-inner{transform:rotateY(180deg)}
+.fc-face{position:absolute;inset:0;backface-visibility:hidden;border:1.5px solid var(--line);border-radius:var(--radius-lg);
+  display:flex;align-items:center;justify-content:center;text-align:center;padding:26px;background:var(--surface-2)}
+.fc-face .fc-label{position:absolute;top:14px;left:16px;font-size:10.5px;font-weight:700;letter-spacing:.05em;color:var(--faint)}
+.fc-face .fc-text{font-family:var(--serif);font-size:17px;font-weight:600;color:var(--ink-soft);line-height:1.4}
+.fc-back{transform:rotateY(180deg);background:var(--navy-bg)}
+.fc-back .fc-text{font-family:var(--sans);font-weight:500;font-size:14.5px;color:var(--navy-ink)}
+.fc-hint{text-align:center;font-size:11.5px;color:var(--faint);margin:-8px 0 16px}
+.fc-controls{display:flex;gap:8px;justify-content:center;margin-bottom:10px}
+.fc-controls .btn{flex:1;max-width:150px}
+.fc-know{border-color:var(--teal-bg);background:var(--teal-bg);color:var(--teal)}
+.fc-learning{border-color:var(--red-line);background:var(--red-bg);color:var(--red)}
+.fc-nav{display:flex;justify-content:space-between;align-items:center;margin-top:14px}
+.fc-nav .btn{padding:9px 14px}
+.fc-filter{display:flex;gap:6px;margin-bottom:14px}
+.fc-filter button{flex:1;border:1px solid var(--line);background:var(--surface-2);border-radius:9px;
+  padding:8px;font-size:11.5px;font-weight:700;cursor:pointer;color:var(--muted)}
+.fc-filter button.active{background:var(--navy);border-color:var(--navy);color:#fff}
+
+/* ============ MOBILE ============ */
+@media(max-width:920px){
+  .sidebar{display:none}
+  .app{display:block}
+  .topbar{display:flex;align-items:center;gap:10px;position:sticky;top:0;z-index:40;background:var(--surface);
+    border-bottom:1px solid var(--line);padding:0 14px;height:var(--topbar-h)}
+  .topbar .crest-badge{width:30px;height:30px;font-size:13px;border-radius:8px}
+  .topbar .tb-title{font-family:var(--serif);font-weight:600;font-size:14.5px;flex:1;line-height:1.2}
+  .topbar .tb-title span{display:block;font-family:var(--sans);font-size:9.5px;color:var(--faint);font-weight:700;letter-spacing:.05em}
+  main{padding:18px 16px 90px}
+  .grid{grid-template-columns:1fr}
+  .kv{grid-template-columns:100px 1fr}
+  .section-head{padding:16px}
+  .content{padding:0 16px 18px}
+  .search-row{position:sticky;top:var(--topbar-h);z-index:30;background:var(--bg);padding:10px 0 8px;margin:0}
+
+  .fc-stage{height:220px}
+  .fc-face{padding:18px}
+  .fc-face .fc-text{font-size:15.5px}
+
+  .bottom-nav{position:fixed;bottom:0;left:0;right:0;background:var(--surface);border-top:1px solid var(--line);
+    display:flex;z-index:50;padding-bottom:env(safe-area-inset-bottom)}
+  .bn-item{flex:1;display:flex;flex-direction:column;align-items:center;gap:3px;padding:9px 0 8px;
+    border:none;background:none;cursor:pointer;color:var(--faint);font-size:9.5px;font-weight:700}
+  .bn-item.active{color:var(--navy)}
+  .bn-item svg{width:20px;height:20px}
+
+  .drawer-backdrop{position:fixed;inset:0;background:rgba(14,20,32,.45);z-index:55;display:none}
+  .drawer-backdrop.show{display:block}
+  .drawer{position:fixed;top:0;left:0;bottom:0;width:82%;max-width:320px;background:#fff;z-index:56;
+    transform:translateX(-105%);transition:transform .22s ease;overflow-y:auto}
+  .drawer.show{transform:translateX(0)}
+}
+@media(min-width:921px){.bottom-nav,.drawer,.drawer-backdrop{display:none}}
+
+/* ============ PRINT ============ */
+@media print{
+  .sidebar,.topbar,.bottom-nav,.search-row,.mode-switch,.modal-backdrop,.drawer,.drawer-backdrop,.case-nav,.mark-done{display:none!important}
+  .app{display:block}
+  main{max-width:100%;padding:0}
+  body{background:#fff}
+  .section{box-shadow:none;break-inside:avoid;border-color:#ccc}
+  .section.collapsed .content{display:block!important}
+  #case-sim .content{display:none!important}
+  .numbers{background:#fff;color:#000;border:1px solid #ccc}
+  .numbers .num{background:#f4f4f4;color:#000}
+}
+</style>
+</head>
+<body>
+
+<div class="app">
+
+  <!-- ============ SIDEBAR (desktop) ============ -->
+  <aside class="sidebar" id="sidebar">
+    <div class="brandmark">
+      <div class="crest">
+        <div class="crest-badge">DB</div>
+        <div class="crest-name">Dr Mohammed Badawy<span>DR BADAWY PEDIATRICS</span></div>
+      </div>
+      <h1>Diabetes Mellitus & DKA</h1>
+      <div class="topic-tag"><i></i>Pediatric Endocrine Emergency</div>
+    </div>
+
+    <div class="progress-widget">
+      <div class="pw-row">
+        <svg class="ring" viewBox="0 0 40 40">
+          <circle cx="20" cy="20" r="16" fill="none" stroke="#E3E6EB" stroke-width="4"/>
+          <circle id="ringFill" cx="20" cy="20" r="16" fill="none" stroke="#16324F" stroke-width="4"
+            stroke-linecap="round" stroke-dasharray="100.5" stroke-dashoffset="100.5" transform="rotate(-90 20 20)"/>
+        </svg>
+        <div class="pw-stats"><b id="pwPct">0%</b>study progress</div>
+      </div>
+      <div class="pw-meta">
+        <span>Quiz best: <b id="pwQuiz">—</b></span>
+        <span>Streak: <b id="pwStreak">1</b>🔥</span>
+      </div>
+    </div>
+
+    <nav class="toc" id="toc" aria-label="Section navigation">
+      <div class="toc-label">STUDY MAP</div>
+      <!-- links injected by JS to stay in sync with sections -->
+    </nav>
+
+    <div class="mode-switch">
+      <div class="toc-label">STUDY MODE</div>
+      <div class="mode-grid">
+        <button class="mode-btn active" data-mode="browse">Browse</button>
+        <button class="mode-btn" data-mode="recall" id="recallBtnSide">Active Recall</button>
+        <button class="mode-btn" id="quizBtnSide">Quiz Mode</button>
+        <button class="mode-btn" id="caseBtnSide">Clinical Case</button>
+        <button class="mode-btn" id="fcBtnSide">Flashcards</button>
+        <button class="mode-btn" id="themeBtnSide">🌙 Dark Mode</button>
+      </div>
+    </div>
+  </aside>
+
+  <!-- ============ MOBILE TOPBAR ============ -->
+  <div class="topbar">
+    <button class="icon-btn" id="drawerOpen" aria-label="Open menu">
+      <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M3 6h18M3 12h18M3 18h18"/></svg>
+    </button>
+    <div class="crest-badge">DB</div>
+    <div class="tb-title">Diabetes & DKA<span>DR BADAWY PEDIATRICS</span></div>
+  </div>
+
+  <!-- ============ MOBILE DRAWER ============ -->
+  <div class="drawer-backdrop" id="drawerBackdrop"></div>
+  <div class="drawer" id="drawer">
+    <div class="brandmark">
+      <div class="crest">
+        <div class="crest-badge">DB</div>
+        <div class="crest-name">Dr Mohammed Badawy<span>DR BADAWY PEDIATRICS</span></div>
+      </div>
+      <h1 style="font-size:17px">Diabetes Mellitus & DKA</h1>
+    </div>
+    <div class="progress-widget">
+      <div class="pw-row">
+        <svg class="ring" viewBox="0 0 40 40">
+          <circle cx="20" cy="20" r="16" fill="none" stroke="#E3E6EB" stroke-width="4"/>
+          <circle id="ringFillM" cx="20" cy="20" r="16" fill="none" stroke="#16324F" stroke-width="4"
+            stroke-linecap="round" stroke-dasharray="100.5" stroke-dashoffset="100.5" transform="rotate(-90 20 20)"/>
+        </svg>
+        <div class="pw-stats"><b id="pwPctM">0%</b>study progress</div>
+      </div>
+    </div>
+    <nav class="toc" id="tocM" aria-label="Section navigation (mobile)"></nav>
+  </div>
+
+  <!-- ============ MAIN COLUMN ============ -->
+  <div class="main-col">
+    <main>
+
+      <div class="pagehead">
+        <div class="eyebrow">PEDIATRICS · ENDOCRINE</div>
+        <h2 class="pt">Diabetes Mellitus & DKA</h2>
+        <p>An interactive study map built from your source material — browse by section, test yourself with Active Recall and Quiz Mode, then walk through the DKA management algorithm as a clinical case.</p>
+      </div>
+
+      <div class="search-row">
+        <div class="search-wrap">
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="11" cy="11" r="8"/><path d="M21 21l-4.3-4.3"/></svg>
+          <input id="search" placeholder="Search — e.g. ketones, insulin, cerebral oedema" aria-label="Search study map">
+        </div>
+        <button class="icon-btn" id="recallBtn" aria-label="Toggle Active Recall" title="Active Recall">
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 2a7 7 0 00-4 12.7V17a2 2 0 002 2h4a2 2 0 002-2v-2.3A7 7 0 0012 2z"/><path d="M9 21h6"/></svg>
+        </button>
+        <button class="icon-btn" id="collapseBtn" aria-label="Collapse or expand all" title="Collapse / Expand">
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M8 9l4-4 4 4M8 15l4 4 4-4"/></svg>
+        </button>
+        <button class="icon-btn" id="printBtn" aria-label="Export PDF" title="Export / Print">
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M6 9V2h12v7M6 18H4a2 2 0 01-2-2v-5a2 2 0 012-2h16a2 2 0 012 2v5a2 2 0 01-2 2h-2M6 14h12v8H6z"/></svg>
+        </button>
+        <button class="icon-btn" id="themeBtn" aria-label="Toggle dark mode" title="Dark Mode">
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" id="themeIcon"><path d="M21 12.79A9 9 0 1111.21 3 7 7 0 0021 12.79z"/></svg>
+        </button>
+      </div>
+
+      <div class="hero-note"><b>How to use:</b> browse the map below, mark sections done with the checkmark, switch on Active Recall to hide answers, take the Quiz, then try the Clinical Case simulator for the DKA algorithm. Print for a clean offline copy.</div>
+
+      <!-- ===================== SECTION 01 ===================== -->
+      <section class="section" data-id="dm">
+        <div class="section-head" onclick="toggleSection(this)" role="button" tabindex="0" aria-expanded="true">
+          <div class="sh-left"><div class="sh-index">01</div>
+            <div><h2>Diabetes Mellitus Basics</h2><div class="sh-sub">Definition · insulin actions · classification</div></div>
+          </div>
+          <div class="sh-right"><button class="mark-done" onclick="event.stopPropagation();toggleDone(this)" aria-label="Mark section as reviewed">
+            <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3"><path d="M20 6L9 17l-5-5"/></svg></button>
+            <svg class="chev" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M6 9l6 6 6-6"/></svg></div>
+        </div>
+        <div class="content"><div class="grid">
+          <div class="card"><h3><span class="dot"></span>Definition</h3><div class="kv"><span class="key">DM</span><span class="val">A disease in which the body's ability to produce or respond to insulin is impaired, causing abnormal carbohydrate metabolism and hyperglycaemia.</span></div></div>
+          <div class="card"><h3><span class="dot"></span>Insulin Actions</h3><div class="kv"><span class="key">Glucose</span><span class="val">↓ blood glucose by ↑ cellular glucose uptake, ↑ gluconeogenesis and ↓ glycogenolysis.</span></div><div class="kv"><span class="key">Fat</span><span class="val">↑ lipogenesis</span></div><div class="kv"><span class="key">Overall</span><span class="val">Anabolic effect</span></div></div>
+          <div class="card"><h3><span class="dot"></span>Classification</h3><p><span class="tag blue">Type 1</span> autoimmune β-cell destruction</p><p><span class="tag teal">Type 2</span> insulin resistance → later β-cell failure</p><p><span class="tag purple">Type 3</span> other specific types</p><p><span class="tag amber">Type 4</span> gestational DM</p></div>
+          <div class="card"><h3><span class="dot"></span>T1DM vs T2DM Clues</h3><ul><li>Multiple autoantibodies</li><li>Low insulin C-peptide</li><li>Family history of autoimmune disease</li><li>Normal BMI</li></ul></div>
+        </div></div>
+      </section>
+
+      <!-- ===================== SECTION 02 ===================== -->
+      <section class="section teal" data-id="t1dm">
+        <div class="section-head" onclick="toggleSection(this)" role="button" tabindex="0" aria-expanded="true">
+          <div class="sh-left"><div class="sh-index">02</div>
+            <div><h2>Type 1 Diabetes Mellitus</h2><div class="sh-sub">Epidemiology · risk factors · pathogenesis · diagnosis</div></div>
+          </div>
+          <div class="sh-right"><button class="mark-done" onclick="event.stopPropagation();toggleDone(this)" aria-label="Mark section as reviewed">
+            <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3"><path d="M20 6L9 17l-5-5"/></svg></button>
+            <svg class="chev" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M6 9l6 6 6-6"/></svg></div>
+        </div>
+        <div class="content">
+          <div class="grid">
+            <div class="card"><h3><span class="dot"></span>Epidemiology</h3><ul><li>Peak incidence: fall and winter</li><li>Common diagnosis: 5–7 years and adolescence</li><li>Increasing in children &lt;5 years</li><li>No gender predilection</li></ul></div>
+            <div class="card"><h3><span class="dot"></span>Risk Factors</h3><ul><li>High-risk alleles</li><li>First-degree relative / identical twins</li><li>Congenital rubella, enterovirus or mumps</li><li>Other autoimmune diseases</li></ul></div>
+            <div class="card"><h3><span class="dot"></span>Diagnosis</h3><div class="kv"><span class="key">Random</span><span class="val">≥200 mg/dL + manifestations</span></div><div class="kv"><span class="key">Fasting</span><span class="val">≥126 mg/dL</span></div><div class="kv"><span class="key">2-hour OGTT</span><span class="val">≥200 mg/dL</span></div><div class="kv"><span class="key">HbA1c</span><span class="val">≥6.5</span></div></div>
+            <div class="card"><h3><span class="dot"></span>Clinical Presentation</h3><p><span class="tag teal">Polyuria</span><span class="tag teal">Polydipsia</span><span class="tag teal">Polyphagia</span></p><p>DKA · secondary nocturnal enuresis · abdominal pain · weight loss · fatigue · recurrent infections.</p></div>
+          </div>
+          <div class="flow" style="margin-top:14px"><b class="flow-title">Type 1 DM Pathogenesis</b>
+            <span class="node">T-cell autoimmune β-cell destruction</span><span class="arrow">→</span><span class="node">↓ Insulin</span><span class="arrow">→</span><span class="node">Hyperglycaemia</span><br>
+            <span class="node">↓ Insulin</span><span class="arrow">→</span><span class="node">↓ Lipogenesis</span><span class="arrow">→</span><span class="node">↑ FFA</span><span class="arrow">→</span><span class="node">↑ Ketone bodies</span><br>
+            <span class="node">Hyperglycaemia</span><span class="arrow">→</span><span class="node">Osmotic diuresis</span><span class="arrow">→</span><span class="node">Polyuria + Polydipsia</span>
+          </div>
+        </div>
+      </section>
+
+      <!-- ===================== SECTION 03 ===================== -->
+      <section class="section red" data-id="dka">
+        <div class="section-head" onclick="toggleSection(this)" role="button" tabindex="0" aria-expanded="true">
+          <div class="sh-left"><div class="sh-index">03</div>
+            <div><h2>Diabetic Ketoacidosis</h2><div class="sh-sub">Recognition · severity · clinical picture · complications</div></div>
+          </div>
+          <div class="sh-right"><button class="mark-done" onclick="event.stopPropagation();toggleDone(this)" aria-label="Mark section as reviewed">
+            <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3"><path d="M20 6L9 17l-5-5"/></svg></button>
+            <svg class="chev" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M6 9l6 6 6-6"/></svg></div>
+        </div>
+        <div class="content">
+          <div class="numbers"><b>DKA Diagnostic Snapshot</b><br><span class="num">pH &lt; 7.3</span><span class="num">Glucose &gt; 200 mg/dL</span><span class="num">HCO₃ &lt; 15 mEq/L</span><span class="num">Ketonemia / Ketonuria</span><span class="num">Dehydration</span></div>
+          <div class="grid" style="margin-top:14px">
+            <div class="card"><h3><span class="dot"></span>Severity by pH</h3><div class="answer">Mild: pH 7.2–7.3</div><div class="answer">Moderate: pH 7.1–7.2</div><div class="answer">Severe: pH &lt;7.1</div></div>
+            <div class="card emergency"><h3><span class="dot" style="background:var(--red)"></span>Major Danger</h3><p><b>Cerebral oedema</b> is listed as the most common cause of death and may be worsened by overhydration and rapid correction of hyperglycaemia.</p></div>
+            <div class="card"><h3><span class="dot"></span>Clinical Picture</h3><ul><li>Abdominal pain + vomiting</li><li>Shortness of breath</li><li>Confusion / stupor / coma</li><li>Tachycardia + tachypnoea</li><li>Poor skin turgor + delayed CRT</li><li>Sweet/musty ketotic breath</li></ul></div>
+            <div class="card"><h3><span class="dot"></span>Investigations</h3><ul><li>Hyponatremia in advanced dehydration</li><li>Normal or elevated serum K+</li><li>Positive serum/urine ketones</li><li>Low insulin and C-peptide</li><li>CT brain if cerebral oedema suspected</li></ul></div>
+          </div>
+          <div class="flow" style="margin-top:14px"><b class="flow-title">DKA Pathogenesis</b>
+            <span class="node">Acute insulin insufficiency</span><span class="arrow">→</span><span class="node">Severe hyperglycaemia</span><span class="arrow">→</span><span class="node">Osmotic diuresis</span><span class="arrow">→</span><span class="node">Dehydration</span><br>
+            <span class="node">Acute insulin insufficiency</span><span class="arrow">→</span><span class="node">↑ FFA</span><span class="arrow">→</span><span class="node">↑ Ketones</span><span class="arrow">→</span><span class="node">Metabolic acidosis</span>
+          </div>
+        </div>
+      </section>
+
+      <!-- ===================== SECTION 04 ===================== -->
+      <section class="section amber" data-id="mgmt">
+        <div class="section-head" onclick="toggleSection(this)" role="button" tabindex="0" aria-expanded="true">
+          <div class="sh-left"><div class="sh-index">04</div>
+            <div><h2>DKA Management Algorithm</h2><div class="sh-sub">Acidotic phase → monitoring → insulin → transition</div></div>
+          </div>
+          <div class="sh-right"><button class="mark-done" onclick="event.stopPropagation();toggleDone(this)" aria-label="Mark section as reviewed">
+            <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3"><path d="M20 6L9 17l-5-5"/></svg></button>
+            <svg class="chev" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M6 9l6 6 6-6"/></svg></div>
+        </div>
+        <div class="content">
+          <div class="flow"><b class="flow-title">Overview</b>
+            <span class="node">Assess child</span><span class="arrow">→</span><span class="node">Shock?</span><span class="arrow">→</span><span class="node">0.9% saline 10–20 mL/kg over 1–2 h</span><br>
+            <span class="node">Fluid replacement + maintenance</span><span class="arrow">→</span><span class="node">Monitor electrolytes & neurological state</span><span class="arrow">→</span><span class="node">Start insulin after 1 h</span><br>
+            <span class="node">Glucose 250–300?</span><span class="arrow">→</span><span class="node">Add 5% glucose to saline 1:1</span><span class="arrow">→</span><span class="node">Transition when improved</span>
+          </div>
+          <div class="grid" style="margin-top:14px">
+            <div class="card"><h3><span class="dot"></span>Fluids</h3><ul><li>Deficit: 50–100 mL/kg + maintenance + K as needed over next 23–48 h</li><li>Avoid rapid rehydration</li><li>Add dextrose when glucose reaches 250–300 mg/dL</li><li>Bicarbonate usually not indicated</li></ul></div>
+            <div class="card"><h3><span class="dot"></span>Insulin</h3><ul><li>Infusion 0.05–0.1 U/kg/h after 1 h</li><li><b>No bolus</b></li><li>Check glucose hourly</li><li>Gradual fall about 50 mg/h</li><li>Do not stop IV insulin until 1 h after SC insulin</li></ul></div>
+            <div class="card"><h3><span class="dot"></span>Monitoring</h3><ul><li>Input & output</li><li>Na, K, Ca + acid–base status</li><li>Neurological state</li><li>Consider central line/catheter if shocked</li></ul></div>
+            <div class="card"><h3><span class="dot"></span>Shift to SC Insulin</h3><p>When clinically improved (no vomiting) and acidosis improves:</p><div class="answer">pH &gt; 7.3</div><div class="answer">HCO₃ &gt; 16 mEq/L</div><div class="answer">Stable Na 135–145 mEq/L</div></div>
+          </div>
+        </div>
+      </section>
+
+      <!-- ===================== SECTION 05 ===================== -->
+      <section class="section purple" data-id="lifelong">
+        <div class="section-head" onclick="toggleSection(this)" role="button" tabindex="0" aria-expanded="true">
+          <div class="sh-left"><div class="sh-index">05</div>
+            <div><h2>Lifelong Management & Special Topics</h2><div class="sh-sub">Insulin · monitoring · honeymoon · Somogyi · dawn · MODY</div></div>
+          </div>
+          <div class="sh-right"><button class="mark-done" onclick="event.stopPropagation();toggleDone(this)" aria-label="Mark section as reviewed">
+            <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3"><path d="M20 6L9 17l-5-5"/></svg></button>
+            <svg class="chev" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M6 9l6 6 6-6"/></svg></div>
+        </div>
+        <div class="content"><div class="grid">
+          <div class="card"><h3><span class="dot"></span>Insulin Regimen</h3><p>Basal long-acting insulin + pre-prandial rapid/short-acting insulin. Basal is about 40–50% of total daily dose.</p></div>
+          <div class="card"><h3><span class="dot"></span>Monitoring</h3><p>Daily blood glucose at least 4 times. HbA1c reflects average glucose over previous 2–3 months; the source states a target below 7% for many patients.</p></div>
+          <div class="card"><h3><span class="dot"></span>Somogyi vs Dawn</h3><p><b>Somogyi:</b> late nocturnal hypoglycaemia → counter-regulatory hormones → early morning hyperglycaemia.</p><p><b>Dawn:</b> overnight growth hormone secretion antagonises insulin → early morning hyperglycaemia.</p></div>
+          <div class="card"><h3><span class="dot"></span>MODY</h3><p>Most common monogenic diabetes. Suspect with diagnosis before 25 years, AD inheritance across generations, usually non-obese, and negative islet antibodies.</p></div>
+        </div></div>
+      </section>
+
+      <!-- ===================== SECTION 06 — Rapid Revision ===================== -->
+      <section class="section" data-id="revision">
+        <div class="section-head" onclick="toggleSection(this)" role="button" tabindex="0" aria-expanded="true">
+          <div class="sh-left"><div class="sh-index">06</div>
+            <div><h2>Rapid Revision</h2><div class="sh-sub">Flip each card — numbers worth testing yourself on</div></div>
+          </div>
+          <div class="sh-right"><button class="mark-done" onclick="event.stopPropagation();toggleDone(this)" aria-label="Mark section as reviewed">
+            <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3"><path d="M20 6L9 17l-5-5"/></svg></button>
+            <svg class="chev" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M6 9l6 6 6-6"/></svg></div>
+        </div>
+        <div class="content"><div class="numbers">
+          <div class="num">DM fasting ≥126 mg/dL</div><div class="num">Random ≥200 mg/dL + symptoms</div>
+          <div class="num">DKA pH &lt;7.3</div><div class="num">DKA HCO₃ &lt;15</div>
+          <div class="num">Insulin 0.05–0.1 U/kg/h</div><div class="num">No insulin bolus</div>
+          <div class="num">Glucose monitoring hourly in DKA</div><div class="num">Add dextrose at 250–300 mg/dL</div>
+        </div></div>
+      </section>
+
+      <!-- ===================== CLINICAL CASE SIMULATOR ===================== -->
+      <section class="section" id="case-sim" data-id="case">
+        <div class="section-head" onclick="toggleSection(this)" role="button" tabindex="0" aria-expanded="true">
+          <div class="sh-left"><div class="sh-index">07</div>
+            <div><h2>Clinical Case Simulator</h2><div class="sh-sub">Walk the DKA algorithm — "what would you do next?"</div></div>
+          </div>
+          <div class="sh-right"><svg class="chev" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M6 9l6 6 6-6"/></svg></div>
+        </div>
+        <div class="content">
+          <div class="case-progress" id="caseProgress"></div>
+          <div id="caseSteps"></div>
+        </div>
+      </section>
+
+      <!-- ===================== SUGGESTED MEDICAL ENHANCEMENTS ===================== -->
+      <section class="section suggested" data-id="suggested">
+        <div class="section-head" onclick="toggleSection(this)" role="button" tabindex="0" aria-expanded="false">
+          <div class="sh-left"><div class="sh-index" style="color:var(--gold)">＋</div>
+            <div><h2>Suggested Medical Enhancements</h2><div class="sh-sub">Not from your source — ideas only, kept separate from the core content</div>
+              <span class="flag">Requires your review before adding</span>
+            </div>
+          </div>
+          <div class="sh-right"><svg class="chev" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M6 9l6 6 6-6"/></svg></div>
+        </div>
+        <div class="content"><div class="grid">
+          <div class="card"><h3><span class="dot" style="background:var(--gold)"></span>Initial Work-up Checklist</h3><p>A one-glance admission checklist (weight, VBG, electrolytes, ketones, ECG if K+ concern) — your source covers the individual investigations but not as a bedside checklist.</p></div>
+          <div class="card"><h3><span class="dot" style="background:var(--gold)"></span>Potassium Replacement Detail</h3><p>Your source mentions monitoring K+ but doesn't give a replacement protocol — worth asking your reference text whether it specifies one before this map includes numbers.</p></div>
+          <div class="card"><h3><span class="dot" style="background:var(--gold)"></span>Sick-Day Rules</h3><p>A patient-facing "sick day" card (when to check ketones, when to call the team) — common in DM education but not present in the current source.</p></div>
+          <div class="card"><h3><span class="dot" style="background:var(--gold)"></span>Insulin Pump / CGM Note</h3><p>A short comparison of pump vs multiple daily injections — increasingly relevant clinically but outside your current source material.</p></div>
+        </div></div>
+      </section>
+
+      <div class="footer">
+        <div class="fname">Dr Mohammed Badawy</div>
+        DR BADAWY PEDIATRICS · Interactive Study Map · Diabetes Mellitus & DKA
+      </div>
+
+    </main>
+  </div>
+</div>
+
+<!-- ============ BOTTOM NAV (mobile) ============ -->
+<nav class="bottom-nav" aria-label="Study modes">
+  <button class="bn-item active" id="bnBrowse"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M4 6h16M4 12h16M4 18h10"/></svg>Browse</button>
+  <button class="bn-item" id="bnRecall"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 2a7 7 0 00-4 12.7V17a2 2 0 002 2h4a2 2 0 002-2v-2.3A7 7 0 0012 2z"/><path d="M9 21h6"/></svg>Recall</button>
+  <button class="bn-item" id="bnQuiz"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="9"/><path d="M9.5 9a2.5 2.5 0 015 .5c0 1.5-2 2-2 3.5"/><circle cx="12" cy="17" r=".5" fill="currentColor"/></svg>Quiz</button>
+  <button class="bn-item" id="bnCase"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M9 12l2 2 4-4"/><circle cx="12" cy="12" r="9"/></svg>Case</button>
+  <button class="bn-item" id="bnFc"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="6" width="14" height="10" rx="2"/><path d="M7 20h14V10"/></svg>Cards</button>
+</nav>
+
+<!-- ============ QUIZ MODAL ============ -->
+<div class="modal-backdrop" id="quizModal">
+  <div class="modal">
+    <div class="modal-head"><h2 id="quizTitle">Quiz Mode</h2>
+      <button class="modal-close" id="quizClose" aria-label="Close quiz">
+        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M18 6L6 18M6 6l12 12"/></svg></button>
+    </div>
+    <div id="quizBody"></div>
+  </div>
+</div>
+
+<!-- ============ FLASHCARDS MODAL ============ -->
+<div class="modal-backdrop" id="fcModal">
+  <div class="modal">
+    <div class="modal-head"><h2>Flashcards</h2>
+      <button class="modal-close" id="fcClose" aria-label="Close flashcards">
+        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M18 6L6 18M6 6l12 12"/></svg></button>
+    </div>
+    <div class="fc-filter">
+      <button class="active" data-f="all">All (<span id="fcCountAll">0</span>)</button>
+      <button data-f="learning">Still learning (<span id="fcCountLearning">0</span>)</button>
+      <button data-f="known">Known (<span id="fcCountKnown">0</span>)</button>
+    </div>
+    <div class="fc-meta"><span id="fcPos">1 / 1</span><span id="fcKnownTag" style="display:none;color:var(--teal);font-weight:700">✓ Known</span></div>
+    <div class="fc-stage">
+      <div class="fc-card" id="fcCard">
+        <div class="fc-inner">
+          <div class="fc-face front"><span class="fc-label">TERM / QUESTION</span><div class="fc-text" id="fcFront"></div></div>
+          <div class="fc-face fc-back"><span class="fc-label">ANSWER</span><div class="fc-text" id="fcBack"></div></div>
+        </div>
+      </div>
+    </div>
+    <div class="fc-hint">Tap the card to flip</div>
+    <div class="fc-controls">
+      <button class="btn fc-learning" id="fcLearningBtn">Still learning</button>
+      <button class="btn fc-know" id="fcKnowBtn">I know this</button>
+    </div>
+    <div class="fc-nav">
+      <button class="btn" id="fcPrev">← Prev</button>
+      <button class="btn" id="fcShuffle" title="Shuffle">🔀 Shuffle</button>
+      <button class="btn" id="fcNext">Next →</button>
+    </div>
+  </div>
+</div>
+
+<script>
+/* ============================================================
+   DATA — derived directly from the source study map content
+   ============================================================ */
+const SECTIONS = [
+  {id:'dm',label:'01 — DM Basics'},
+  {id:'t1dm',label:'02 — Type 1 DM'},
+  {id:'dka',label:'03 — DKA'},
+  {id:'mgmt',label:'04 — Management'},
+  {id:'lifelong',label:'05 — Lifelong & Special Topics'},
+  {id:'revision',label:'06 — Rapid Revision'},
+  {id:'case',label:'07 — Clinical Case'}
+];
+
+const QUIZ = [
+  {q:"What fasting glucose value is diagnostic of DM?",opts:["≥100 mg/dL","≥126 mg/dL","≥140 mg/dL","≥200 mg/dL"],a:1,ex:"Fasting ≥126 mg/dL is the diagnostic threshold (Section 02)."},
+  {q:"What random glucose (with symptoms) is diagnostic of DM?",opts:["≥140 mg/dL","≥160 mg/dL","≥200 mg/dL","≥250 mg/dL"],a:2,ex:"Random ≥200 mg/dL plus manifestations is diagnostic (Section 02)."},
+  {q:"What HbA1c value is diagnostic of DM?",opts:["≥5.7","≥6.5","≥7.0","≥8.0"],a:1,ex:"HbA1c ≥6.5 is diagnostic (Section 02)."},
+  {q:"What pH defines DKA?",opts:["<7.5","<7.4","<7.3","<7.0"],a:2,ex:"DKA is defined by pH <7.3 (Section 03)."},
+  {q:"What HCO₃ level defines DKA?",opts:["<20 mEq/L","<15 mEq/L","<10 mEq/L","<25 mEq/L"],a:1,ex:"HCO₃ <15 mEq/L is part of the DKA diagnostic snapshot (Section 03)."},
+  {q:"What pH range defines severe DKA?",opts:["7.2–7.3","7.1–7.2","<7.1","<6.9"],a:2,ex:"Severe DKA is defined as pH <7.1 (Section 03)."},
+  {q:"What is the most common cause of death in DKA?",opts:["Hypoglycaemia","Cerebral oedema","Sepsis","Arrhythmia"],a:1,ex:"Cerebral oedema is listed as the most common cause of death in DKA (Section 03)."},
+  {q:"Should an insulin bolus be given at the start of DKA treatment?",opts:["Yes, always","No — infusion only, no bolus","Only if glucose >600","Only in severe DKA"],a:1,ex:"The algorithm explicitly states no bolus — insulin is given as an infusion (Section 04)."},
+  {q:"What is the recommended insulin infusion rate in DKA?",opts:["0.01–0.05 U/kg/h","0.05–0.1 U/kg/h","0.1–0.5 U/kg/h","1–2 U/kg/h"],a:1,ex:"Infusion of 0.05–0.1 U/kg/h is started after the first hour of fluids (Section 04)."},
+  {q:"At what glucose level should dextrose be added to IV fluids?",opts:["100–150 mg/dL","150–200 mg/dL","250–300 mg/dL","above 400 mg/dL"],a:2,ex:"Dextrose is added when glucose reaches 250–300 mg/dL (Section 04)."},
+  {q:"What pH is required before shifting from IV to SC insulin?",opts:["> 7.1","> 7.2","> 7.3","> 7.5"],a:2,ex:"Shift to SC insulin requires pH >7.3, HCO₃ >16, and stable sodium (Section 04)."},
+  {q:"About what fraction of the total daily insulin dose is basal insulin?",opts:["10–20%","20–30%","40–50%","70–80%"],a:2,ex:"Basal insulin is about 40–50% of the total daily dose (Section 05)."},
+  {q:"What causes the Somogyi phenomenon?",opts:["Overnight growth hormone surge","Late nocturnal hypoglycaemia → rebound hyperglycaemia","Missed evening insulin dose","Excess bedtime carbohydrate"],a:1,ex:"Somogyi: late nocturnal hypoglycaemia triggers counter-regulatory hormones causing early morning hyperglycaemia (Section 05)."},
+  {q:"What causes the Dawn phenomenon?",opts:["Overnight growth hormone secretion antagonising insulin","Nocturnal hypoglycaemia","Excess basal insulin","Dehydration"],a:0,ex:"Dawn phenomenon results from overnight growth hormone secretion antagonising insulin (Section 05)."},
+  {q:"MODY is typically diagnosed before what age?",opts:["10 years","18 years","25 years","40 years"],a:2,ex:"MODY is suspected with diagnosis before 25 years, AD inheritance, usually non-obese, negative islet antibodies (Section 05)."},
+  {q:"What destroys β-cells in the pathogenesis of Type 1 DM?",opts:["Viral cytolysis directly","T-cell autoimmune destruction","Amyloid deposition","Chronic hyperglycaemia"],a:1,ex:"T-cell mediated autoimmune destruction of β-cells drives Type 1 DM (Section 02)."},
+  {q:"When is Type 1 DM incidence typically highest?",opts:["Spring and summer","Fall and winter","No seasonal pattern","Only in winter"],a:1,ex:"Peak incidence of Type 1 DM is in fall and winter (Section 02)."},
+];
+
+const CASE_STEPS = [
+  {prompt:"A child presents in DKA. What is the first step?",
+   choices:[
+     {t:"Assess the child clinically — is there shock?",c:true},
+     {t:"Start the insulin infusion immediately",c:false},
+     {t:"Give an IV insulin bolus",c:false}],
+   fb:"Correct approach: assess first, since fluid strategy depends on whether the child is in shock (Section 04)."},
+  {prompt:"The child is in shock. What do you give?",
+   choices:[
+     {t:"0.9% saline 10–20 mL/kg over 1–2 hours",c:true},
+     {t:"5% dextrose only",c:false},
+     {t:"IV bicarbonate",c:false}],
+   fb:"0.9% saline 10–20 mL/kg over 1–2 h is the shock-phase fluid step (Section 04)."},
+  {prompt:"When should the insulin infusion be started?",
+   choices:[
+     {t:"Immediately, together with the first fluid bolus",c:false},
+     {t:"After the first hour of fluid replacement",c:true},
+     {t:"Only after sodium fully normalises",c:false}],
+   fb:"Insulin is started after 1 hour of fluid replacement, never as an immediate bolus (Section 04)."},
+  {prompt:"What insulin regimen is used, and at what rate?",
+   choices:[
+     {t:"0.5–1 U/kg as a single bolus",c:false},
+     {t:"0.05–0.1 U/kg/h infusion, no bolus",c:true},
+     {t:"Whatever rate normalises glucose fastest",c:false}],
+   fb:"Infusion of 0.05–0.1 U/kg/h, with no bolus at any point (Section 04)."},
+  {prompt:"Blood glucose has fallen to 260 mg/dL. What changes in the fluids?",
+   choices:[
+     {t:"Stop all IV fluids",c:false},
+     {t:"Add 5% dextrose to the saline 1:1",c:true},
+     {t:"Double the insulin infusion rate",c:false}],
+   fb:"Once glucose reaches 250–300 mg/dL, add 5% dextrose to the saline 1:1 (Section 04)."},
+  {prompt:"When is it appropriate to shift to subcutaneous (SC) insulin?",
+   choices:[
+     {t:"As soon as glucose drops below 200 mg/dL",c:false},
+     {t:"After a fixed 24 hours, regardless of status",c:false},
+     {t:"When clinically improved with pH >7.3, HCO₃ >16, stable Na 135–145",c:true}],
+   fb:"Transition criteria: clinical improvement (no vomiting), pH >7.3, HCO₃ >16 mEq/L, stable sodium 135–145 mEq/L (Section 04)."}
+];
+
+const FLASHCARDS = QUIZ.map(item=>({
+  front: item.q,
+  back: item.opts[item.a] + ' — ' + item.ex
+}));
+
+/* ============================================================
+   STATE (persisted locally in the browser — nothing leaves the device)
+   ============================================================ */
+const store = {
+  get(k,d){try{const v=localStorage.getItem('dbp_'+k);return v===null?d:JSON.parse(v)}catch(e){return d}},
+  set(k,v){try{localStorage.setItem('dbp_'+k,JSON.stringify(v))}catch(e){}}
+};
+let progress = store.get('progress',{});
+let quizBest = store.get('quizBest',null);
+
+/* ---- streak ---- */
+(function streak(){
+  const today = new Date().toISOString().slice(0,10);
+  const last = store.get('lastVisit',null);
+  let s = store.get('streak',1);
+  if(last!==today){
+    const y=new Date(Date.now()-864e5).toISOString().slice(0,10);
+    s = (last===y)? s+1 : 1;
+    store.set('streak',s); store.set('lastVisit',today);
+  }
+  document.getElementById('pwStreak').textContent = s;
+})();
+
+/* ---- build TOC ---- */
+function buildTOC(container){
+  container.querySelectorAll('.toc-link').forEach(n=>n.remove());
+  SECTIONS.forEach(s=>{
+    const btn=document.createElement('button');
+    btn.className='toc-link'+(progress[s.id]?' done':'');
+    btn.dataset.id=s.id;
+    btn.innerHTML='<span class="toc-dot"></span>'+s.label;
+    btn.onclick=()=>{document.querySelector('[data-id="'+s.id+'"]').scrollIntoView({behavior:'smooth',block:'start'});closeDrawer();};
+    container.appendChild(btn);
+  });
+}
+buildTOC(document.getElementById('toc'));
+buildTOC(document.getElementById('tocM'));
+
+/* ---- progress ring + done state ---- */
+function refreshProgress(){
+  const total = SECTIONS.length;
+  const done = Object.values(progress).filter(Boolean).length;
+  const pct = Math.round(100*done/total);
+  const circumference = 2*Math.PI*16;
+  const offset = circumference - (pct/100)*circumference;
+  ['ringFill','ringFillM'].forEach(id=>{
+    const el=document.getElementById(id);
+    if(el){el.setAttribute('stroke-dasharray',circumference.toFixed(1));el.setAttribute('stroke-dashoffset',offset.toFixed(1));}
+  });
+  document.getElementById('pwPct').textContent = pct+'%';
+  const m=document.getElementById('pwPctM'); if(m) m.textContent=pct+'%';
+  document.getElementById('pwQuiz').textContent = quizBest===null? '—' : quizBest+'/'+QUIZ.length;
+  document.querySelectorAll('.toc-link').forEach(b=>b.classList.toggle('done',!!progress[b.dataset.id]));
+  document.querySelectorAll('.mark-done').forEach(b=>{
+    const id=b.closest('.section').dataset.id;
+    b.classList.toggle('done',!!progress[id]);
+  });
+}
+function toggleDone(btn){
+  const id = btn.closest('.section').dataset.id;
+  progress[id] = !progress[id];
+  store.set('progress',progress);
+  refreshProgress();
+}
+refreshProgress();
+
+/* ---- collapse / expand section ---- */
+function toggleSection(head){
+  const sec = head.closest('.section');
+  sec.classList.toggle('collapsed');
+  head.setAttribute('aria-expanded', !sec.classList.contains('collapsed'));
+}
+document.querySelectorAll('.section-head').forEach(h=>{
+  h.addEventListener('keydown',e=>{if(e.key==='Enter'||e.key===' '){e.preventDefault();toggleSection(h);}});
+});
+
+/* ---- active section highlight in TOC ---- */
+const observer = new IntersectionObserver((entries)=>{
+  entries.forEach(en=>{
+    if(en.isIntersecting){
+      const id=en.target.dataset.id;
+      document.querySelectorAll('.toc-link').forEach(b=>b.classList.toggle('active', b.dataset.id===id));
+    }
+  });
+},{rootMargin:'-20% 0px -70% 0px'});
+document.querySelectorAll('.section').forEach(s=>observer.observe(s));
+
+/* ---- search ---- */
+const search=document.getElementById('search');
+search.addEventListener('input',()=>{
+  const q=search.value.toLowerCase().trim();
+  document.querySelectorAll('.section').forEach(sec=>{
+    let any=false;
+    sec.querySelectorAll('.card,.flow,.numbers,.case-step').forEach(el=>{
+      const match=el.innerText.toLowerCase().includes(q);
+      el.style.display=match?'':'none'; if(match) any=true;
+    });
+    sec.style.display=any||!q?'':'none';
+    if(q&&any) sec.classList.remove('collapsed');
+  });
+});
+
+/* ---- active recall ---- */
+function setRecall(on){
+  document.body.classList.toggle('active-recall',on);
+  document.getElementById('recallBtn').classList.toggle('on',on);
+  document.getElementById('recallBtnSide').classList.toggle('active',on);
+  document.getElementById('bnRecall').classList.toggle('active',on);
+}
+document.getElementById('recallBtn').onclick=()=>setRecall(!document.body.classList.contains('active-recall'));
+document.getElementById('recallBtnSide').onclick=()=>setRecall(!document.body.classList.contains('active-recall'));
+document.getElementById('bnRecall').onclick=()=>setRecall(!document.body.classList.contains('active-recall'));
+document.addEventListener('click',e=>{
+  if(document.body.classList.contains('active-recall')&&(e.target.classList.contains('val')||e.target.classList.contains('answer')))
+    e.target.classList.toggle('revealed');
+});
+
+/* ---- collapse / expand all ---- */
+document.getElementById('collapseBtn').onclick=()=>{
+  const secs=[...document.querySelectorAll('.section')];
+  const shouldCollapse=secs.some(s=>!s.classList.contains('collapsed'));
+  secs.forEach(s=>s.classList.toggle('collapsed',shouldCollapse));
+};
+document.getElementById('printBtn').onclick=()=>window.print();
+
+/* ---- mobile drawer ---- */
+const drawer=document.getElementById('drawer'), drawerBackdrop=document.getElementById('drawerBackdrop');
+function openDrawer(){drawer.classList.add('show');drawerBackdrop.classList.add('show');}
+function closeDrawer(){drawer.classList.remove('show');drawerBackdrop.classList.remove('show');}
+document.getElementById('drawerOpen').onclick=openDrawer;
+drawerBackdrop.onclick=closeDrawer;
+
+/* ---- mode buttons (sidebar + bottom nav) ---- */
+document.getElementById('quizBtnSide').onclick=openQuiz;
+document.getElementById('bnQuiz').onclick=openQuiz;
+document.getElementById('caseBtnSide').onclick=()=>document.getElementById('case-sim').scrollIntoView({behavior:'smooth'});
+document.getElementById('bnCase').onclick=()=>document.getElementById('case-sim').scrollIntoView({behavior:'smooth'});
+document.getElementById('bnBrowse').onclick=()=>window.scrollTo({top:0,behavior:'smooth'});
+
+/* ============================================================
+   QUIZ ENGINE
+   ============================================================ */
+let quizOrder=[], quizIdx=0, quizScore=0;
+function shuffle(arr){const a=[...arr];for(let i=a.length-1;i>0;i--){const j=Math.floor(Math.random()*(i+1));[a[i],a[j]]=[a[j],a[i]];}return a;}
+function openQuiz(){
+  quizOrder=shuffle(QUIZ.map((_,i)=>i)).slice(0,10);
+  quizIdx=0; quizScore=0;
+  document.getElementById('quizModal').classList.add('show');
+  renderQuiz();
+}
+function closeQuiz(){document.getElementById('quizModal').classList.remove('show');}
+document.getElementById('quizClose').onclick=closeQuiz;
+document.getElementById('quizModal').addEventListener('click',e=>{if(e.target.id==='quizModal') closeQuiz();});
+
+function renderQuiz(){
+  const body=document.getElementById('quizBody');
+  if(quizIdx>=quizOrder.length){
+    if(quizBest===null||quizScore>quizBest){quizBest=quizScore;store.set('quizBest',quizBest);refreshProgress();}
+    body.innerHTML = `<div class="quiz-result">
+      <div style="font-size:13px;color:var(--muted);font-weight:700">QUIZ COMPLETE</div>
+      <div class="score">${quizScore}/${quizOrder.length}</div>
+      <p style="color:var(--muted);font-size:13.5px">Best score so far: ${quizBest}/${QUIZ.length>10?10:QUIZ.length}</p>
+      <button class="btn primary" onclick="openQuiz()">Try Again</button>
+    </div>`;
+    return;
+  }
+  const item = QUIZ[quizOrder[quizIdx]];
+  body.innerHTML = `
+    <div class="quiz-meta"><span>Question ${quizIdx+1} of ${quizOrder.length}</span><span>Score: ${quizScore}</span></div>
+    <div class="quiz-bar"><i style="width:${100*quizIdx/quizOrder.length}%"></i></div>
+    <div class="quiz-q">${item.q}</div>
+    <div id="quizOpts"></div>
+    <div class="quiz-explain" id="quizExplain">${item.ex}</div>
+    <div style="text-align:right;margin-top:6px"><button class="btn primary" id="quizNext" disabled>Next</button></div>
+  `;
+  const optsWrap=document.getElementById('quizOpts');
+  item.opts.forEach((opt,i)=>{
+    const b=document.createElement('button');
+    b.className='quiz-opt'; b.textContent=opt;
+    b.onclick=()=>{
+      if(b.dataset.locked) return;
+      [...optsWrap.children].forEach(c=>{c.dataset.locked='1';c.disabled=true;});
+      if(i===item.a){ b.classList.add('correct'); quizScore++; }
+      else{ b.classList.add('wrong'); optsWrap.children[item.a].classList.add('correct'); }
+      document.getElementById('quizExplain').classList.add('show');
+      document.getElementById('quizNext').disabled=false;
+      document.querySelector('.quiz-meta span:last-child').textContent='Score: '+quizScore;
+    };
+    optsWrap.appendChild(b);
+  });
+  document.getElementById('quizNext').onclick=()=>{quizIdx++;renderQuiz();};
+}
+
+/* ============================================================
+   CLINICAL CASE SIMULATOR
+   ============================================================ */
+let caseIdx=0;
+function renderCase(){
+  const wrap=document.getElementById('caseSteps');
+  const prog=document.getElementById('caseProgress');
+  prog.innerHTML = CASE_STEPS.map((_,i)=>`<i class="${i<caseIdx?'pass':i===caseIdx?'now':''}"></i>`).join('');
+  if(caseIdx>=CASE_STEPS.length){
+    wrap.innerHTML=`<div class="case-done"><h3>Case complete</h3><p style="color:var(--muted);font-size:13.5px">You've walked the full DKA management algorithm, step by step.</p><button class="btn primary" onclick="caseIdx=0;renderCase()">Restart Case</button></div>`;
+    return;
+  }
+  const step=CASE_STEPS[caseIdx];
+  wrap.innerHTML=`
+    <div class="case-prompt">${step.prompt}</div>
+    <div class="case-choices" id="caseChoices"></div>
+    <div class="case-feedback" id="caseFeedback">${step.fb}</div>
+    <div class="case-nav"><button class="btn" id="caseBack" ${caseIdx===0?'disabled':''}>Back</button><button class="btn primary" id="caseNext" disabled>Next Step</button></div>
+  `;
+  const cWrap=document.getElementById('caseChoices');
+  step.choices.forEach(ch=>{
+    const b=document.createElement('button');
+    b.className='case-choice'; b.textContent=ch.t;
+    b.onclick=()=>{
+      if(b.dataset.locked) return;
+      [...cWrap.children].forEach(c=>c.dataset.locked='1');
+      if(ch.c) b.classList.add('correct');
+      else{ b.classList.add('wrong'); [...cWrap.children].find((x,i)=>step.choices[i].c).classList.add('correct'); }
+      document.getElementById('caseFeedback').classList.add('show');
+      document.getElementById('caseNext').disabled=false;
+    };
+    cWrap.appendChild(b);
+  });
+  document.getElementById('caseNext').onclick=()=>{caseIdx++;renderCase();};
+  document.getElementById('caseBack').onclick=()=>{caseIdx=Math.max(0,caseIdx-1);renderCase();};
+}
+renderCase();
+
+/* ============================================================
+   FLASHCARDS
+   ============================================================ */
+let fcKnown = store.get('fcKnown',{});      // {index:true}
+let fcDeck = FLASHCARDS.map((_,i)=>i);
+let fcPos = 0;
+let fcFilterMode = 'all';
+
+function fcCurrentFilteredDeck(){
+  if(fcFilterMode==='known') return fcDeck.filter(i=>fcKnown[i]);
+  if(fcFilterMode==='learning') return fcDeck.filter(i=>!fcKnown[i]);
+  return fcDeck;
+}
+function fcUpdateCounts(){
+  const knownCt = FLASHCARDS.filter((_,i)=>fcKnown[i]).length;
+  document.getElementById('fcCountAll').textContent = FLASHCARDS.length;
+  document.getElementById('fcCountKnown').textContent = knownCt;
+  document.getElementById('fcCountLearning').textContent = FLASHCARDS.length-knownCt;
+}
+function openFlashcards(){
+  fcDeck = FLASHCARDS.map((_,i)=>i);
+  fcPos = 0; fcFilterMode='all';
+  document.querySelectorAll('.fc-filter button').forEach(b=>b.classList.toggle('active',b.dataset.f==='all'));
+  document.getElementById('fcModal').classList.add('show');
+  fcUpdateCounts();
+  fcRender();
+}
+function closeFlashcards(){document.getElementById('fcModal').classList.remove('show');}
+function fcRender(){
+  const list = fcCurrentFilteredDeck();
+  if(list.length===0){
+    document.getElementById('fcFront').textContent='No cards in this filter yet.';
+    document.getElementById('fcBack').textContent='Try a different filter.';
+    document.getElementById('fcPos').textContent='0 / 0';
+    return;
+  }
+  if(fcPos>=list.length) fcPos=0;
+  if(fcPos<0) fcPos=list.length-1;
+  const idx = list[fcPos];
+  const card = FLASHCARDS[idx];
+  document.getElementById('fcFront').textContent = card.front;
+  document.getElementById('fcBack').textContent = card.back;
+  document.getElementById('fcPos').textContent = (fcPos+1)+' / '+list.length;
+  document.getElementById('fcCard').classList.remove('flipped');
+  document.getElementById('fcKnownTag').style.display = fcKnown[idx] ? '' : 'none';
+}
+document.getElementById('fcCard').addEventListener('click',()=>{document.getElementById('fcCard').classList.toggle('flipped');});
+document.getElementById('fcPrev').onclick=()=>{fcPos--;fcRender();};
+document.getElementById('fcNext').onclick=()=>{fcPos++;fcRender();};
+document.getElementById('fcShuffle').onclick=()=>{fcDeck=shuffle(fcDeck);fcPos=0;fcRender();};
+document.getElementById('fcKnowBtn').onclick=()=>{
+  const idx=fcCurrentFilteredDeck()[fcPos]; fcKnown[idx]=true; store.set('fcKnown',fcKnown);
+  fcUpdateCounts(); fcPos++; fcRender();
+};
+document.getElementById('fcLearningBtn').onclick=()=>{
+  const idx=fcCurrentFilteredDeck()[fcPos]; fcKnown[idx]=false; store.set('fcKnown',fcKnown);
+  fcUpdateCounts(); fcPos++; fcRender();
+};
+document.querySelectorAll('.fc-filter button').forEach(b=>{
+  b.onclick=()=>{
+    fcFilterMode=b.dataset.f; fcPos=0;
+    document.querySelectorAll('.fc-filter button').forEach(x=>x.classList.toggle('active',x===b));
+    fcRender();
+  };
+});
+document.getElementById('fcClose').onclick=closeFlashcards;
+document.getElementById('fcModal').addEventListener('click',e=>{if(e.target.id==='fcModal') closeFlashcards();});
+document.getElementById('fcBtnSide').onclick=openFlashcards;
+document.getElementById('bnFc').onclick=openFlashcards;
+
+/* ============================================================
+   DARK MODE
+   ============================================================ */
+function applyTheme(theme){
+  document.documentElement.setAttribute('data-theme', theme);
+  document.getElementById('themeColorMeta').setAttribute('content', theme==='dark' ? '#12151C' : '#16324F');
+  document.getElementById('themeIcon').innerHTML = theme==='dark'
+    ? '<circle cx="12" cy="12" r="5"/><path d="M12 1v2M12 21v2M4.2 4.2l1.4 1.4M18.4 18.4l1.4 1.4M1 12h2M21 12h2M4.2 19.8l1.4-1.4M18.4 5.6l1.4-1.4"/>'
+    : '<path d="M21 12.79A9 9 0 1111.21 3 7 7 0 0021 12.79z"/>';
+  document.getElementById('themeBtnSide').textContent = theme==='dark' ? '☀️ Light Mode' : '🌙 Dark Mode';
+  document.getElementById('themeBtnSide').classList.toggle('active', theme==='dark');
+  document.getElementById('themeBtn').classList.toggle('on', theme==='dark');
+  store.set('theme', theme);
+}
+(function initTheme(){
+  const saved = store.get('theme', null);
+  const preferred = saved || (window.matchMedia && window.matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light');
+  applyTheme(preferred);
+})();
+function toggleTheme(){
+  applyTheme(document.documentElement.getAttribute('data-theme')==='dark' ? 'light' : 'dark');
+}
+document.getElementById('themeBtn').onclick = toggleTheme;
+document.getElementById('themeBtnSide').onclick = toggleTheme;
+
+/* ============================================================
+   PWA — installable app + offline (only activates once hosted
+   over https:// or http://localhost; browsers block Service
+   Workers on a plain double-clicked file:// page).
+   ============================================================ */
+if('serviceWorker' in navigator && (location.protocol==='https:' || location.hostname==='localhost')){
+  window.addEventListener('load', ()=>{
+    navigator.serviceWorker.register('sw.js').catch(()=>{/* hosting without sw.js present — ignore */});
+  });
+}
+</script>
+</body>
+</html>
