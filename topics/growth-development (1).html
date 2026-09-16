@@ -1,0 +1,315 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+<title>Growth &amp; Development — Dr Badawy Academy</title>
+<meta name="description" content="Interactive Pediatrics lesson on growth assessment and growth charts">
+<meta name="theme-color" content="#10141B" id="themeColorMeta">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,500;9..144,600;9..144,700&family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+<style>
+:root{--bg:#F6F8F8;--surface:#FFF;--surface2:#F8FAFA;--ink:#17233F;--soft:#35425A;--muted:#71808B;--faint:#9AA5AE;--line:#E2E8EA;--navy:#1D2A4D;--navy2:#101B35;--gold:#B8892B;--gold2:#E8BD5B;--goldbg:#FFF7E3;--teal:#178F8C;--teal2:#54C5B2;--tealbg:#EAF7F5;--red:#AE4942;--redbg:#FBEDEC;--shadow:0 12px 34px rgba(24,46,65,.07);--shadow2:0 22px 58px rgba(18,31,54,.2);--serif:'Fraunces',Georgia,serif;--sans:'Inter',system-ui,-apple-system,'Segoe UI',sans-serif}
+[data-theme=dark]{--bg:#10141B;--surface:#191D26;--surface2:#1F242F;--ink:#EDF0F4;--soft:#D7DCE5;--muted:#98A3B5;--faint:#707B8C;--line:#2B313B;--navy:#6AA7DE;--navy2:#091624;--gold:#E6B955;--gold2:#F1C96B;--goldbg:#2E2715;--teal:#54C5B2;--teal2:#72D5C3;--tealbg:#142925;--red:#E07A72;--redbg:#301A1A;--shadow:0 12px 34px rgba(0,0,0,.18);--shadow2:0 22px 58px rgba(0,0,0,.3)}
+*{box-sizing:border-box}html{scroll-behavior:smooth;scroll-padding-top:86px}body{margin:0;background:var(--bg);color:var(--ink);font-family:var(--sans);-webkit-font-smoothing:antialiased}a{text-decoration:none;color:inherit}button{font:inherit;color:inherit}::selection{background:var(--goldbg);color:var(--ink)}a:focus-visible,button:focus-visible,summary:focus-visible{outline:2px solid var(--teal);outline-offset:3px;border-radius:7px}
+.shell{max-width:1180px;margin:auto;padding:0 24px 76px}.topbar{height:72px;display:flex;align-items:center;justify-content:space-between;gap:16px}.brand{display:flex;align-items:center;gap:11px}.mini-logo{width:42px;height:42px;border-radius:13px;background:linear-gradient(145deg,var(--gold2),var(--gold));display:grid;place-items:center;color:#10283E;font-family:Georgia,serif;font-size:16px;font-weight:800;letter-spacing:-2px;box-shadow:0 7px 18px rgba(0,0,0,.14)}.brand-text{font-family:var(--serif);font-weight:600;line-height:1.1;font-size:15px}.brand-text small{display:block;font-family:var(--sans);font-size:9px;letter-spacing:.11em;color:var(--muted);font-weight:800;margin-top:4px}.top-actions{display:flex;gap:8px}.top-btn{border:1px solid var(--line);background:var(--surface);border-radius:11px;padding:9px 12px;font-size:11px;font-weight:800;cursor:pointer}.top-btn:hover{border-color:var(--teal)}
+.hero{position:relative;overflow:hidden;border-radius:30px;background:linear-gradient(118deg,#1D294C 0%,#24375E 56%,#127E80 150%);padding:42px 46px;color:#fff;box-shadow:var(--shadow2)}.hero:before,.hero:after{content:"";position:absolute;border:1px solid rgba(255,255,255,.1);border-radius:50%;pointer-events:none}.hero:before{width:470px;height:470px;right:-220px;top:-290px}.hero:after{width:280px;height:280px;right:-55px;bottom:-220px}.hero-grid{position:relative;z-index:1;display:grid;grid-template-columns:1fr auto;gap:30px;align-items:start}.breadcrumb{font-size:10px;font-weight:800;letter-spacing:.14em;color:var(--gold2);text-transform:uppercase;margin-bottom:14px}.hero h1{font-family:var(--serif);font-size:clamp(38px,5.4vw,60px);line-height:1;letter-spacing:-.035em;margin:0}.hero h1 span{color:var(--gold2)}.hero p{max-width:670px;margin:16px 0 0;color:rgba(255,255,255,.78);font-size:14px;line-height:1.7}.hero-tags{display:flex;gap:8px;flex-wrap:wrap;margin-top:21px}.hero-tag{padding:7px 10px;border:1px solid rgba(255,255,255,.17);background:rgba(255,255,255,.07);border-radius:99px;font-size:10px;font-weight:800}.hero-mark{width:112px;height:112px;border-radius:29px;background:linear-gradient(145deg,#F7D990,#A87516);display:grid;place-items:center;color:#10283E;font-family:Georgia,serif;font-size:36px;font-weight:800;letter-spacing:-3px;box-shadow:0 18px 38px rgba(0,0,0,.25);transform:rotate(4deg)}
+.lesson-progress{margin-top:16px;background:var(--surface);border:1px solid var(--line);border-radius:17px;padding:14px 16px;display:grid;grid-template-columns:1fr auto;align-items:center;gap:14px;box-shadow:var(--shadow)}.progress-copy b{display:block;font-size:12px}.progress-copy span{font-size:10.5px;color:var(--muted)}.progress-number{font-family:var(--serif);font-size:22px;color:var(--teal);font-weight:700}.bar{grid-column:1/-1;height:6px;background:var(--line);border-radius:99px;overflow:hidden}.bar i{display:block;width:0;height:100%;background:linear-gradient(90deg,var(--gold2),var(--teal));border-radius:99px;transition:width .3s ease}
+.progress-meta{display:flex;gap:14px;margin-top:7px;font-size:10px;color:var(--faint)}.progress-meta b{display:inline;color:var(--soft);font-family:var(--sans);font-size:10px}.study-tools{margin-top:12px;display:grid;grid-template-columns:minmax(220px,1fr) auto;gap:10px}.search-wrap{position:relative}.search-wrap svg{position:absolute;left:13px;top:50%;transform:translateY(-50%);color:var(--faint)}#lessonSearch{width:100%;height:44px;border:1px solid var(--line);border-radius:12px;background:var(--surface);color:var(--ink);padding:0 14px 0 39px;font-size:12px;outline:0}#lessonSearch:focus{border-color:var(--teal)}.tool-buttons{display:flex;gap:7px;flex-wrap:wrap}.tool-btn{height:44px;border:1px solid var(--line);border-radius:12px;background:var(--surface);padding:0 12px;font-size:10px;font-weight:800;cursor:pointer;color:var(--soft)}.tool-btn:hover{border-color:var(--teal)}.tool-btn.on{background:var(--teal);border-color:var(--teal);color:#fff}
+.lesson-layout{display:grid;grid-template-columns:230px minmax(0,1fr);gap:22px;margin-top:22px;align-items:start}.toc{position:sticky;top:18px;background:var(--surface);border:1px solid var(--line);border-radius:18px;padding:16px;box-shadow:var(--shadow)}.toc-label{font-size:9px;font-weight:800;letter-spacing:.12em;color:var(--gold);text-transform:uppercase;margin:2px 4px 10px}.toc a{display:flex;align-items:center;gap:9px;padding:9px 10px;border-radius:10px;font-size:11px;font-weight:700;color:var(--muted);transition:.15s}.toc a:before{content:"";width:6px;height:6px;border-radius:50%;background:var(--line);flex:none}.toc a:hover,.toc a.active{background:var(--tealbg);color:var(--teal)}.toc a.active:before,.toc a.done:before{background:var(--teal)}.toc a.done{color:var(--teal)}
+.lesson-content{display:grid;gap:17px}.section-card{background:var(--surface);border:1px solid var(--line);border-radius:22px;padding:26px 28px;box-shadow:var(--shadow)}.section-card.is-done{border-color:rgba(23,143,140,.48)}.section-head{display:flex;align-items:flex-start;gap:13px;margin-bottom:19px}.section-head>div:nth-child(2){flex:1}.section-num{width:38px;height:38px;flex:none;border-radius:12px;background:var(--tealbg);color:var(--teal);display:grid;place-items:center;font-size:11px;font-weight:800}.section-head h2{font-family:var(--serif);font-size:25px;margin:0}.section-head p{margin:4px 0 0;color:var(--muted);font-size:12px;line-height:1.55}.section-check{width:34px;height:34px;flex:none;border:1.5px solid var(--line);border-radius:10px;background:var(--surface2);display:grid;place-items:center;cursor:pointer;color:transparent}.section-check:hover{border-color:var(--teal)}.section-check.done{background:var(--teal);border-color:var(--teal);color:#fff}.section-body.collapsed{display:none}.lead-grid{display:grid;grid-template-columns:1fr 1fr;gap:12px}.definition{background:var(--surface2);border:1px solid var(--line);border-radius:15px;padding:16px}.definition b{display:block;color:var(--teal);font-size:11px;text-transform:uppercase;letter-spacing:.08em;margin-bottom:7px}.definition p{font-size:13px;line-height:1.65;margin:0;color:var(--soft)}
+.objectives{margin-top:13px;padding:15px 17px;border-radius:15px;background:var(--navy2);color:#fff}.objectives b{font-family:var(--serif);font-size:17px;color:var(--gold2)}.objectives ol{margin:10px 0 0;padding-left:19px}.objectives li{font-size:12px;line-height:1.7;color:rgba(255,255,255,.78)}
+.stage-grid,.factor-grid,.formula-grid,.metric-grid{display:grid;gap:12px}.stage-grid{grid-template-columns:repeat(3,1fr)}.stage{position:relative;background:var(--surface2);border:1px solid var(--line);border-radius:15px;padding:17px}.stage small{color:var(--gold);font-size:9px;font-weight:800;letter-spacing:.08em;text-transform:uppercase}.stage h3{font-size:14px;margin:8px 0 5px}.stage p{font-size:11px;color:var(--muted);line-height:1.55;margin:0}.stage .risk{margin-top:11px;padding-top:10px;border-top:1px dashed var(--line);color:var(--soft);font-size:10.5px}.factor-grid{grid-template-columns:repeat(3,1fr)}.factor{border:1px solid var(--line);border-radius:15px;padding:16px;background:var(--surface2)}.factor h3{font-size:13px;margin:0 0 9px;color:var(--teal)}.factor ul,.clean-list{padding-left:18px;margin:0}.factor li,.clean-list li{font-size:11.5px;color:var(--soft);line-height:1.65;margin:3px 0}
+.pearl{border-left:4px solid var(--gold);background:var(--goldbg);border-radius:12px;padding:14px 16px;margin-top:14px}.pearl b{display:block;color:var(--gold);font-size:10px;letter-spacing:.09em;text-transform:uppercase;margin-bottom:5px}.pearl p{margin:0;color:var(--soft);font-size:12px;line-height:1.6}.formula-grid{grid-template-columns:repeat(3,1fr);margin-top:15px}.formula{background:linear-gradient(145deg,var(--navy2),#24375E);border-radius:15px;padding:17px;color:#fff}.formula small{color:var(--gold2);font-size:9px;font-weight:800;text-transform:uppercase;letter-spacing:.08em}.formula strong{display:block;font-family:var(--serif);font-size:18px;margin:10px 0 5px}.formula span{font-size:10.5px;color:rgba(255,255,255,.68)}
+.milestones{display:grid;grid-template-columns:repeat(4,1fr);gap:10px;margin-top:13px}.milestone{border:1px solid var(--line);background:var(--surface2);border-radius:13px;padding:13px;text-align:center}.milestone b{font-family:var(--serif);color:var(--teal);font-size:20px}.milestone span{display:block;color:var(--muted);font-size:10px;margin-top:5px;line-height:1.4}
+.metric-grid{grid-template-columns:1fr 1fr}.metric{border:1px solid var(--line);border-radius:15px;padding:17px}.metric h3{font-size:14px;margin:0 0 8px}.metric p,.metric li{font-size:11.5px;line-height:1.65;color:var(--soft)}.metric p{margin:0}.ratio-list{display:grid;grid-template-columns:repeat(3,1fr);gap:9px;margin-top:12px}.ratio{background:var(--tealbg);border-radius:11px;padding:12px;text-align:center}.ratio b{font-family:var(--serif);font-size:20px;color:var(--teal)}.ratio span{display:block;font-size:9px;color:var(--muted);margin-top:4px}
+.compare{display:grid;grid-template-columns:1fr 1fr;gap:11px;margin-top:12px}.compare-card{border-radius:14px;padding:15px;border:1px solid var(--line);background:var(--surface2)}.compare-card h3{font-size:13px;margin:0 0 8px;color:var(--teal)}.compare-card.advanced h3{color:var(--gold)}.compare-card ul{margin:0;padding-left:17px}.compare-card li{font-size:11px;color:var(--soft);line-height:1.65}
+.table-wrap{overflow-x:auto;border:1px solid var(--line);border-radius:14px;margin-top:14px}table{border-collapse:collapse;width:100%;min-width:650px;font-size:11px}th{background:var(--navy2);color:#fff;padding:11px 10px;text-align:center}td{padding:10px;border-top:1px solid var(--line);text-align:center;color:var(--soft)}td:first-child{text-align:left;font-weight:800;color:var(--ink)}tr:nth-child(even) td{background:var(--surface2)}
+.chart-demo{margin-top:15px;border:1px solid var(--line);border-radius:16px;padding:16px;background:var(--surface2)}.chart-title{display:flex;justify-content:space-between;align-items:center;gap:10px;margin-bottom:12px}.chart-title b{font-size:12px}.chart-title span{font-size:9px;color:var(--muted)}.chart{height:190px;position:relative;border-left:1px solid var(--muted);border-bottom:1px solid var(--muted);background:repeating-linear-gradient(to right,transparent 0,transparent calc(16.66% - 1px),var(--line) calc(16.66% - 1px),var(--line) 16.66%),repeating-linear-gradient(to top,transparent 0,transparent calc(20% - 1px),var(--line) calc(20% - 1px),var(--line) 20%);overflow:hidden}.curve{position:absolute;left:3%;right:3%;height:56%;bottom:10%;border-top:3px solid var(--teal);border-radius:50% 50% 0 0;transform:skewY(-8deg)}.curve.c50{bottom:23%;height:50%;border-color:var(--gold)}.curve.c97{bottom:37%;height:44%;border-color:var(--navy)}.chart-label{position:absolute;right:5px;font-size:9px;font-weight:800}.l3{bottom:42%;color:var(--teal)}.l50{bottom:58%;color:var(--gold)}.l97{bottom:74%;color:var(--navy)}
+.recall{margin-top:14px;display:grid;gap:9px}.recall details{border:1px solid var(--line);border-radius:13px;background:var(--surface2);overflow:hidden}.recall summary{cursor:pointer;list-style:none;padding:13px 15px;font-size:11.5px;font-weight:800;display:flex;align-items:center;justify-content:space-between;gap:10px}.recall summary::-webkit-details-marker{display:none}.recall summary:after{content:"+";font-size:17px;color:var(--teal)}.recall details[open] summary:after{content:"−"}.recall-answer{padding:0 15px 14px;color:var(--soft);font-size:11.5px;line-height:1.65}
+.active-recall .recall-target{filter:blur(6px);user-select:none;cursor:pointer;transition:filter .16s}.active-recall .recall-target:hover{filter:blur(3px)}.active-recall .recall-target.revealed{filter:none}.modal-backdrop{position:fixed;inset:0;background:rgba(6,12,22,.72);display:none;align-items:center;justify-content:center;padding:18px;z-index:50}.modal-backdrop.show{display:flex}.modal{width:min(680px,100%);max-height:90vh;overflow:auto;background:var(--surface);border:1px solid var(--line);border-radius:22px;padding:22px;box-shadow:0 30px 90px rgba(0,0,0,.34)}.modal-head{display:flex;justify-content:space-between;align-items:center;gap:14px;margin-bottom:17px}.modal-head h2{font-family:var(--serif);font-size:24px;margin:0}.modal-close{width:34px;height:34px;border-radius:10px;border:1px solid var(--line);background:var(--surface2);cursor:pointer}.quiz-meta,.fc-meta{display:flex;justify-content:space-between;color:var(--muted);font-size:10.5px;margin-bottom:11px}.quiz-q{font-family:var(--serif);font-size:20px;line-height:1.4;margin:18px 0}.quiz-opt{width:100%;display:block;text-align:left;border:1px solid var(--line);background:var(--surface2);border-radius:12px;padding:12px 13px;margin:8px 0;font-size:12px;cursor:pointer}.quiz-opt:hover{border-color:var(--teal)}.quiz-opt.correct{border-color:var(--teal);background:var(--tealbg);color:var(--teal);font-weight:800}.quiz-opt.wrong{border-color:var(--red);background:var(--redbg);color:var(--red)}.quiz-explain{display:none;background:var(--surface2);border:1px solid var(--line);border-radius:11px;padding:12px;font-size:11.5px;line-height:1.6;color:var(--soft);margin-top:11px}.quiz-explain.show{display:block}.quiz-next{display:block;margin:14px 0 0 auto;border:0;border-radius:11px;background:var(--teal);color:#fff;padding:11px 18px;font-size:11px;font-weight:800;cursor:pointer}.quiz-next:disabled{opacity:.35}.quiz-result{text-align:center;padding:22px 4px}.quiz-result strong{display:block;font-family:var(--serif);font-size:48px;color:var(--teal)}.fc-stage{perspective:900px}.fc-card{min-height:260px;position:relative;transform-style:preserve-3d;transition:transform .45s;cursor:pointer}.fc-card.flipped{transform:rotateY(180deg)}.fc-face{position:absolute;inset:0;backface-visibility:hidden;border:1px solid var(--line);border-radius:18px;background:var(--surface2);padding:25px;display:grid;place-items:center;text-align:center}.fc-back{transform:rotateY(180deg);background:var(--tealbg);border-color:var(--teal)}.fc-label{position:absolute;left:18px;top:16px;color:var(--faint);font-size:9px;font-weight:800;letter-spacing:.1em}.fc-text{font-family:var(--serif);font-size:20px;line-height:1.5}.fc-hint{text-align:center;color:var(--faint);font-size:10px;margin:10px}.fc-controls,.fc-nav{display:flex;gap:8px;justify-content:center;flex-wrap:wrap;margin-top:10px}.mini-btn{border:1px solid var(--line);background:var(--surface2);border-radius:10px;padding:9px 13px;font-size:10px;font-weight:800;cursor:pointer}.mini-btn.know{background:var(--tealbg);border-color:var(--teal);color:var(--teal)}.mini-btn.learning{background:var(--redbg);border-color:var(--red);color:var(--red)}
+.dev-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:11px}.dev-card{position:relative;border:1px solid var(--line);border-radius:15px;padding:16px;background:var(--surface2);overflow:hidden}.dev-card:before{content:"";position:absolute;width:70px;height:70px;border-radius:50%;right:-34px;top:-34px;background:var(--tealbg)}.dev-age{display:inline-flex;align-items:center;min-height:27px;padding:0 9px;border-radius:8px;background:var(--navy2);color:var(--gold2);font-size:10px;font-weight:800;letter-spacing:.04em}.dev-card ul{margin:11px 0 0;padding-left:17px}.dev-card li{font-size:11.5px;color:var(--soft);line-height:1.6;margin:3px 0}.empty-search{display:none;background:var(--goldbg);border:1px solid var(--line);border-radius:14px;padding:15px;color:var(--soft);font-size:12px;text-align:center}
+.complete-card{background:linear-gradient(118deg,var(--navy2),#24375E);border-radius:22px;padding:24px;color:#fff;display:flex;align-items:center;justify-content:space-between;gap:18px}.complete-card h2{font-family:var(--serif);margin:0 0 5px;font-size:23px}.complete-card p{margin:0;color:rgba(255,255,255,.7);font-size:11.5px;line-height:1.6}.complete-btn{border:0;border-radius:12px;background:linear-gradient(135deg,var(--gold2),var(--gold));color:#10283E;padding:12px 16px;font-size:11px;font-weight:800;cursor:pointer;white-space:nowrap}.complete-btn.done{background:var(--teal2)}.footer{text-align:center;padding-top:30px;color:var(--faint);font-size:10.5px}.footer b{font-family:var(--serif);font-size:13px;color:var(--soft);display:block;margin-bottom:3px}
+@media(max-width:900px){.lesson-layout{grid-template-columns:1fr}.toc{position:static;display:flex;overflow-x:auto;gap:5px;padding:10px}.toc-label{display:none}.toc a{white-space:nowrap}.toc a:before{display:none}.factor-grid,.stage-grid,.formula-grid,.dev-grid{grid-template-columns:1fr 1fr}.metric-grid{grid-template-columns:1fr}.study-tools{grid-template-columns:1fr}.tool-buttons{overflow-x:auto;flex-wrap:nowrap}.tool-btn{white-space:nowrap}}
+@media(max-width:620px){.shell{padding:0 15px 60px}.topbar{height:64px}.top-actions .top-btn:first-child{display:none}.hero{padding:27px 21px;border-radius:23px}.hero-grid{grid-template-columns:1fr}.hero-mark{position:absolute;right:17px;top:20px;width:66px;height:66px;border-radius:18px;font-size:23px}.hero h1{font-size:36px;padding-right:62px}.hero p{font-size:12.5px}.section-card{padding:21px 18px}.section-head h2{font-size:22px}.lead-grid,.stage-grid,.factor-grid,.formula-grid,.compare,.dev-grid{grid-template-columns:1fr}.milestones{grid-template-columns:1fr 1fr}.ratio-list{grid-template-columns:1fr}.complete-card{display:block}.complete-btn{width:100%;margin-top:15px}.modal{padding:17px}.fc-card{min-height:300px}.fc-text{font-size:18px}.progress-meta{flex-direction:column;gap:3px}}
+@media print{.top-actions,.study-tools,.toc,.section-check,.complete-card,.modal-backdrop{display:none!important}.shell{max-width:none;padding:0}.lesson-layout{display:block}.section-card{box-shadow:none;break-inside:avoid}.section-body.collapsed{display:block}.hero{box-shadow:none}}
+</style>
+</head>
+<body>
+<div class="shell">
+<header class="topbar">
+<a class="brand" href="../index.html"><div class="mini-logo" aria-hidden="true">MB</div><div class="brand-text">Dr Badawy Academy<small>PEDIATRICS · INTERACTIVE LEARNING</small></div></a>
+<nav class="top-actions"><a class="top-btn" href="../index.html#branches">General Pediatrics</a><button class="top-btn" id="themeBtn" aria-pressed="false">🌙 Dark</button></nav>
+</header>
+
+<main>
+<section class="hero" aria-label="Lesson introduction">
+<div class="hero-grid"><div><div class="breadcrumb">GENERAL PEDIATRICS · CHAPTER 01</div><h1>Growth &amp;<br><span>Development.</span></h1><p>A structured clinical guide to growth patterns, anthropometric assessment, body proportions, bone age, growth charts and developmental milestones.</p><div class="hero-tags"><span class="hero-tag">Interactive Study Map</span><span class="hero-tag">7 Learning Sections</span><span class="hero-tag">Progress Saved</span></div></div><div class="hero-mark" aria-hidden="true">GD</div></div>
+</section>
+
+<div class="lesson-progress"><div class="progress-copy"><b>Lesson progress</b><span id="progressText">Mark each section when you finish it.</span><div class="progress-meta"><span>Best quiz: <b id="bestQuiz">—</b></span><span>Flashcards known: <b id="knownCount">0 / 0</b></span></div></div><div class="progress-number" id="progressNumber">0%</div><div class="bar"><i id="progressBar"></i></div></div>
+
+<div class="study-tools">
+<label class="search-wrap" aria-label="Search this lesson"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="11" cy="11" r="7"></circle><path d="m20 20-4-4"></path></svg><input id="lessonSearch" type="search" placeholder="Search this chapter…"></label>
+<div class="tool-buttons"><button class="tool-btn" id="recallTool">Active Recall</button><button class="tool-btn" id="flashcardsTool">Flashcards</button><button class="tool-btn" id="quizTool">Quick Quiz</button><button class="tool-btn" id="collapseTool">Collapse Sections</button><button class="tool-btn" id="printTool">Print</button></div>
+</div>
+
+<div class="lesson-layout">
+<aside class="toc" aria-label="Lesson sections"><div class="toc-label">Lesson Sections</div><a href="#foundations">Foundations</a><a href="#factors">Growth Factors</a><a href="#weight">Weight</a><a href="#length">Length &amp; Proportions</a><a href="#bone-age">Bone Age</a><a href="#growth-charts">Growth Charts</a><a href="#milestones">Developmental Milestones</a></aside>
+
+<div class="lesson-content">
+<section class="section-card track-section" id="foundations">
+<div class="section-head"><div class="section-num">01</div><div><h2>Foundations</h2><p>Definitions, learning objectives and the stages of growth.</p></div></div>
+<div class="lead-grid"><div class="definition"><b>Growth</b><p>Increase in the size of the organism due to an increase in the size and/or number of its constituent cells.</p></div><div class="definition"><b>Development</b><p>Maturation of functions, acquisition of skills and adaptation to stress.</p></div></div>
+<div class="objectives"><b>Learning objectives</b><ol><li>Evaluate the normal growth pattern.</li><li>Understand growth curves and their uses.</li><li>Recognize developmental milestones used for follow-up.</li></ol></div>
+<div class="group-label" style="margin:20px 0 11px;color:var(--gold);font-size:10px;font-weight:800;letter-spacing:.1em;text-transform:uppercase">Stages of growth and development</div>
+<div class="stage-grid"><article class="stage"><small>First 8 weeks</small><h3>Embryonic period</h3><p>Devoted primarily to organogenesis.</p><div class="risk">Teratogenic exposure may cause abortion or congenital anomalies.</div></article><article class="stage"><small>9-28 weeks</small><h3>Early fetal period</h3><p>Rapid growth mainly in length.</p><div class="risk">Teratogenic exposure may cause fetal death, stillbirth, prematurity or IUGR.</div></article><article class="stage"><small>28-40 weeks</small><h3>Late fetal period</h3><p>Rapid growth mainly in weight.</p><div class="risk">Fetal well-being and maternal health remain major determinants.</div></article></div>
+</section>
+
+<section class="section-card track-section" id="factors">
+<div class="section-head"><div class="section-num">02</div><div><h2>Factors Affecting Growth</h2><p>A practical prenatal-to-postnatal framework.</p></div></div>
+<div class="factor-grid"><article class="factor"><h3>Before delivery</h3><ul><li>Familial factors.</li><li>Racial factors.</li></ul></article><article class="factor"><h3>During pregnancy</h3><ul><li>Maternal disease: TORCH, diabetes and hypertension.</li><li>Maternal drugs, irradiation or malnutrition.</li><li>Maternal hypoxia.</li></ul></article><article class="factor"><h3>After delivery</h3><ul><li>Age and sex.</li><li>Hormonal influences.</li><li>Nutritional and psychological status.</li><li>Chronic illness and socioeconomic factors.</li></ul></article></div>
+<div class="pearl"><b>Hormonal pattern</b><p>Fetal growth is influenced by chorionic gonadotropins and placental growth factors; infancy is influenced by growth hormone and thyroxine; adolescence is accelerated by sex hormones.</p></div>
+</section>
+
+<section class="section-card track-section" id="weight">
+<div class="section-head"><div class="section-num">03</div><div><h2>Weight Assessment</h2><p>Normal pattern, major milestones and expected-weight formulas.</p></div></div>
+<ul class="clean-list"><li>Average full-term newborn weight is 3 kg, with a normal range of 2.501-4 kg.</li><li>About 7-10% of birth weight is lost during the first 4 days because of fluid and meconium loss and initially limited feeding.</li><li>Birth weight is usually regained by day 10, within a normal range of 7-14 days.</li></ul>
+<div class="milestones"><div class="milestone"><b>3 kg</b><span>Average weight at birth</span></div><div class="milestone"><b>×2</b><span>Birth weight at 4 months</span></div><div class="milestone"><b>×3</b><span>Birth weight at 1 year</span></div><div class="milestone"><b>×4</b><span>Birth weight at 2 years</span></div></div>
+<div class="formula-grid"><div class="formula"><small>3-12 months</small><strong>(Age in months + 9) ÷ 2</strong><span>Expected weight in kilograms</span></div><div class="formula"><small>1-6 years</small><strong>(Age in years × 2) + 8</strong><span>Expected weight in kilograms</span></div><div class="formula"><small>7-12 years</small><strong>[(Age × 7) - 5] ÷ 2</strong><span>Expected weight in kilograms</span></div></div>
+<div class="recall"><details><summary>When should birth weight be regained?</summary><div class="recall-answer">Usually by the 10th day of life, with a normal range of 7-14 days.</div></details><details><summary>When does birth weight double, triple and quadruple?</summary><div class="recall-answer">It doubles at 4 months, triples at 1 year and quadruples at 2 years.</div></details></div>
+</section>
+
+<section class="section-card track-section" id="length">
+<div class="section-head"><div class="section-num">04</div><div><h2>Length &amp; Body Proportions</h2><p>Linear growth, nutritional interpretation and proportionality.</p></div></div>
+<div class="metric-grid"><article class="metric"><h3>Normal linear growth</h3><ul class="clean-list"><li>Standing height is measured using a stadiometer.</li><li>Length is about 50 cm at birth, 75 cm at 1 year and 90 cm at 2 years.</li><li>From 2 years until adolescence, growth is approximately 4-5 cm/year.</li><li>Expected height from 2-12 years: <b>(age × 6) + 77 cm</b>.</li><li>By 13 years, birth length is approximately tripled to about 150 cm.</li></ul></article><article class="metric"><h3>Weight-length interpretation</h3><ul class="clean-list"><li>Low weight with normal length suggests recent nutritional deficiency.</li><li>Normal weight with low length suggests old nutritional deficiency.</li><li>Low weight with low length suggests old and recent nutritional deficiency.</li><li>Recumbent length is about 0.5 cm more than standing height due to joint compression.</li></ul></article></div>
+<div class="pearl"><b>Upper segment / Lower segment</b><p>Lower segment is measured from the pubic symphysis to the heel; upper segment is calculated by subtracting lower segment from stature.</p></div>
+<div class="ratio-list"><div class="ratio"><b>1.7 : 1</b><span>At birth</span></div><div class="ratio"><b>1.3 : 1</b><span>At 3-4 years</span></div><div class="ratio"><b>1 : 1</b><span>At 7-10 years</span></div></div>
+<div class="compare"><div class="compare-card"><h3>Abnormal US/LS ratio</h3><ul><li>High ratio (short limbs): achondroplasia or rickets.</li><li>Low ratio (short trunk): mucopolysaccharidoses or hypogonadism.</li><li>Normal ratio: proportionate dwarfism such as hypopituitarism or constitutional dwarfism.</li></ul></div><div class="compare-card advanced"><h3>Arm span / Height</h3><ul><li>Children: arm span is 1-2 cm shorter than height.</li><li>Adolescents: arm span equals height.</li><li>Adults: arm span exceeds height by about 5 cm.</li><li>Useful for distinguishing proportionate from disproportionate short stature.</li></ul></div></div>
+</section>
+
+<section class="section-card track-section" id="bone-age">
+<div class="section-head"><div class="section-num">05</div><div><h2>Bone Age Assessment</h2><p>Ossification centers and clinical interpretation.</p></div></div>
+<div class="metric-grid"><article class="metric"><h3>Ossification timeline</h3><ul class="clean-list"><li>Fetal bone ossification begins during the 5th intrauterine month.</li><li>Calcaneus: 5 months; talus: 7 months; cuboid: 8 months.</li><li>Proximal tibia and lower femur: 9 months.</li><li>Capitate and hamate appear during the first year.</li><li>Number of carpal ossification centers ≈ age in years + 1 until age 6.</li><li>The eighth and final center appears between 10-12 years.</li></ul></article><article class="metric"><h3>Clinical value</h3><p>Bone age provides a maturational reference that helps distinguish delayed from advanced skeletal development when assessing abnormal growth.</p><div class="pearl"><b>Exam pearl</b><p>Interpret bone age alongside height, growth velocity, pubertal status and the child’s clinical context.</p></div></article></div>
+<div class="compare"><div class="compare-card"><h3>Delayed bone age</h3><ul><li>Growth hormone deficiency.</li><li>Hypothyroidism.</li><li>Malnutrition.</li><li>Chronic illness.</li><li>Constitutional delay.</li></ul></div><div class="compare-card advanced"><h3>Advanced bone age</h3><ul><li>Growth hormone excess.</li><li>Hyperthyroidism.</li><li>Simple obesity.</li></ul></div></div>
+</section>
+
+<section class="section-card track-section" id="growth-charts">
+<div class="section-head"><div class="section-num">06</div><div><h2>Growth Charts</h2><p>Centiles, growth velocity and clinical uses.</p></div></div>
+<div class="definition"><b>Definition</b><p>A growth chart arranges a particular child’s measurement in comparison with children of the same age and sex.</p></div>
+<div class="chart-demo"><div class="chart-title"><b>Conceptual centile curves</b><span>3rd · 50th · 97th centiles</span></div><div class="chart"><div class="curve"></div><div class="curve c50"></div><div class="curve c97"></div><span class="chart-label l3">3rd</span><span class="chart-label l50">50th</span><span class="chart-label l97">97th</span></div></div>
+<div class="pearl"><b>Interpretation</b><p>The 50th centile represents the common central value for age. Values below the 3rd centile or above the 97th centile are considered abnormal and require clinical interpretation.</p></div>
+<div class="table-wrap"><table><thead><tr><th>Male weight</th><th>3rd</th><th>5th</th><th>25th</th><th>50th</th><th>75th</th><th>95th</th><th>97th</th></tr></thead><tbody><tr><td>Birth</td><td>2.46</td><td>2.54</td><td>3.00</td><td>3.27</td><td>3.64</td><td>4.15</td><td>4.32</td></tr><tr><td>1 month</td><td>3.00</td><td>3.16</td><td>3.82</td><td>4.29</td><td>4.75</td><td>5.38</td><td>5.51</td></tr><tr><td>2 months</td><td>4.31</td><td>4.43</td><td>5.32</td><td>5.98</td><td>6.56</td><td>7.37</td><td>7.49</td></tr></tbody></table></div>
+<div class="metric-grid" style="margin-top:14px"><article class="metric"><h3>Growth velocity</h3><p>The rate of growth per unit of time for the same child. It requires at least two measurements separated by a known interval, such as 3, 6 or 12 months.</p></article><article class="metric"><h3>Examples</h3><p>Weight-for-age, length-for-age and weight-for-length charts. Body measurements and developmental characteristics may each have their own specific curves.</p></article></div>
+<div class="objectives"><b>Value of growth charts</b><ol><li>Detect children who require investigation.</li><li>Provide an easy method for growth assessment.</li><li>Detect protein-energy malnutrition early through a flat curve and monitor response to therapy.</li><li>Support research.</li></ol></div>
+<div class="recall"><details><summary>What centile values are considered abnormal?</summary><div class="recall-answer">Values below the 3rd centile or above the 97th centile.</div></details><details><summary>What is required to calculate growth velocity?</summary><div class="recall-answer">At least two measurements in the same child with a known time interval between them.</div></details></div>
+</section>
+
+<section class="section-card track-section" id="milestones">
+<div class="section-head"><div class="section-num">07</div><div><h2>Developmental Milestones</h2><p>A practical age-by-age summary from birth to five years.</p></div></div>
+<div class="dev-grid">
+<article class="dev-card"><span class="dev-age">At birth</span><ul><li>Turns head from side to side.</li></ul></article>
+<article class="dev-card"><span class="dev-age">2 months</span><ul><li>Smiles at the sound of your voice.</li><li>Follows you with the eyes as you move slowly around the room.</li></ul></article>
+<article class="dev-card"><span class="dev-age">3 months</span><ul><li>Raises head and chest when prone.</li><li>Grasps objects.</li><li>Smiles at other people.</li></ul></article>
+<article class="dev-card"><span class="dev-age">4 months</span><ul><li>Babbles, laughs and tries to imitate sounds.</li><li>Holds the head steady.</li></ul></article>
+<article class="dev-card"><span class="dev-age">5–6 months</span><ul><li>Rolls from prone to back, then from back to prone.</li><li>Moves objects from hand to hand.</li></ul></article>
+<article class="dev-card"><span class="dev-age">6–7 months</span><ul><li>Starts sitting.</li><li>Responds to own name.</li><li>Moves eyes to a rapidly moving object.</li><li>Finds partially hidden objects.</li></ul></article>
+<article class="dev-card"><span class="dev-age">8–9 months</span><ul><li>Sits without support.</li><li>Crawls.</li><li>Babbles “mama” and “dada”.</li></ul></article>
+<article class="dev-card"><span class="dev-age">12 months</span><ul><li>Walks with or without support.</li><li>Says at least one word.</li><li>Enjoys imitating people.</li></ul></article>
+<article class="dev-card"><span class="dev-age">18 months</span><ul><li>Walks independently.</li><li>Drinks from a cup.</li><li>Says at least 15 words.</li><li>Points to body parts.</li></ul></article>
+<article class="dev-card"><span class="dev-age">2 years</span><ul><li>Runs and jumps.</li><li>Speaks in two-word sentences.</li><li>Follows simple instructions.</li><li>Begins make-believe play.</li></ul></article>
+<article class="dev-card"><span class="dev-age">3 years</span><ul><li>Climbs well.</li><li>Speaks in multiword sentences.</li><li>Sorts objects by shape and color.</li></ul></article>
+<article class="dev-card"><span class="dev-age">4 years</span><ul><li>Gets along with people outside the family.</li><li>Draws circles and squares.</li><li>Rides a tricycle.</li></ul></article>
+<article class="dev-card"><span class="dev-age">5 years</span><ul><li>Tells name and address.</li><li>Jumps, hops and skips.</li><li>Gets dressed.</li><li>Counts 10 or more objects.</li></ul></article>
+</div>
+<div class="recall"><details><summary>When should a child use two-word sentences?</summary><div class="recall-answer">At about 2 years.</div></details><details><summary>What are key milestones at 12 months?</summary><div class="recall-answer">Walking with or without support, saying at least one word and enjoying imitation.</div></details></div>
+</section>
+
+<div class="empty-search" id="emptySearch">No section matches your search.</div>
+<section class="complete-card"><div><h2>Chapter review complete?</h2><p>Mark the lesson complete when you have reviewed all seven sections. Progress is saved on this device.</p></div><button class="complete-btn" id="completeBtn">Mark Lesson Complete</button></section>
+</div>
+</div>
+</main>
+<footer class="footer"><b>Dr Mohammed Badawy</b>DR BADAWY ACADEMY · PEDIATRICS · Interactive Learning</footer>
+</div>
+
+<div class="modal-backdrop" id="quizModal" role="dialog" aria-modal="true" aria-labelledby="quizTitle"><div class="modal"><div class="modal-head"><h2 id="quizTitle">Growth Quick Quiz</h2><button class="modal-close" data-close="quizModal" aria-label="Close">×</button></div><div id="quizBody"></div></div></div>
+<div class="modal-backdrop" id="fcModal" role="dialog" aria-modal="true" aria-labelledby="fcTitle"><div class="modal"><div class="modal-head"><h2 id="fcTitle">Growth Flashcards</h2><button class="modal-close" data-close="fcModal" aria-label="Close">×</button></div><div class="fc-meta"><span id="fcPosition"></span><span id="fcStatus"></span></div><div class="fc-stage"><div class="fc-card" id="fcCard"><div class="fc-face fc-front"><span class="fc-label">QUESTION</span><div class="fc-text" id="fcFront"></div></div><div class="fc-face fc-back"><span class="fc-label">ANSWER</span><div class="fc-text" id="fcBack"></div></div></div></div><div class="fc-hint">Tap the card to reveal the answer</div><div class="fc-controls"><button class="mini-btn learning" id="fcLearning">Still learning</button><button class="mini-btn know" id="fcKnow">I know this</button></div><div class="fc-nav"><button class="mini-btn" id="fcPrev">← Previous</button><button class="mini-btn" id="fcNext">Next →</button></div></div></div>
+<script>
+const LESSON_ID='growth-development';
+const SECTION_KEY='dbp_lessonSectionProgress';
+const PROGRESS_KEY='dbp_academyProgress';
+const FC_KEY='dbp_growth-development_fcKnown';
+const QUIZ_KEY='dbp_growth-development_quizBest';
+const sections=[...document.querySelectorAll('.track-section')];
+const links=[...document.querySelectorAll('.toc a')];
+
+function theme(t){
+  document.documentElement.setAttribute('data-theme',t);
+  try{localStorage.setItem('dbp_theme',t)}catch(e){}
+  const btn=document.getElementById('themeBtn');
+  btn.textContent=t==='dark'?'☀️ Light':'🌙 Dark';
+  btn.setAttribute('aria-pressed',t==='dark'?'true':'false');
+  document.getElementById('themeColorMeta').setAttribute('content',t==='dark'?'#10141B':'#16324F');
+}
+let savedTheme='light';
+try{savedTheme=localStorage.getItem('dbp_theme')||(matchMedia('(prefers-color-scheme:dark)').matches?'dark':'light')}catch(e){}
+theme(savedTheme);
+document.getElementById('themeBtn').onclick=()=>theme(document.documentElement.getAttribute('data-theme')==='dark'?'light':'dark');
+
+function getDone(){
+  try{const all=JSON.parse(localStorage.getItem(SECTION_KEY)||'{}');return new Set(all[LESSON_ID]||[])}catch(e){return new Set()}
+}
+function saveDone(){
+  try{const all=JSON.parse(localStorage.getItem(SECTION_KEY)||'{}');all[LESSON_ID]=[...done];localStorage.setItem(SECTION_KEY,JSON.stringify(all))}catch(e){}
+}
+const done=getDone();
+
+sections.forEach(section=>{
+  const head=section.querySelector('.section-head');
+  const body=document.createElement('div');
+  body.className='section-body';
+  [...section.children].filter(child=>child!==head).forEach(child=>body.appendChild(child));
+  section.appendChild(body);
+  const check=document.createElement('button');
+  check.className='section-check';
+  check.innerHTML='<svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="m5 12 4 4L19 6"/></svg>';
+  check.setAttribute('aria-label','Mark '+section.querySelector('h2').textContent+' complete');
+  check.onclick=()=>{done.has(section.id)?done.delete(section.id):done.add(section.id);saveDone();updateProgress()};
+  head.appendChild(check);
+  head.addEventListener('click',e=>{if(e.target.closest('.section-check'))return;body.classList.toggle('collapsed')});
+});
+
+function setAcademyCompletion(isComplete){
+  try{
+    const p=JSON.parse(localStorage.getItem(PROGRESS_KEY)||'{}');
+    if(isComplete)p[LESSON_ID]=true;else delete p[LESSON_ID];
+    localStorage.setItem(PROGRESS_KEY,JSON.stringify(p));
+    if(isComplete)localStorage.setItem('dbp_lastLesson',LESSON_ID);
+  }catch(e){}
+}
+function updateProgress(){
+  [...done].forEach(id=>{if(!sections.some(s=>s.id===id))done.delete(id)});
+  const pct=Math.round(done.size/sections.length*100);
+  document.getElementById('progressNumber').textContent=pct+'%';
+  document.getElementById('progressBar').style.width=pct+'%';
+  document.getElementById('progressText').textContent=done.size+' of '+sections.length+' sections completed.';
+  sections.forEach(section=>{
+    const isDone=done.has(section.id);
+    section.classList.toggle('is-done',isDone);
+    section.querySelector('.section-check').classList.toggle('done',isDone);
+    section.querySelector('.section-check').setAttribute('aria-pressed',String(isDone));
+  });
+  links.forEach(link=>link.classList.toggle('done',done.has(link.hash.slice(1))));
+  const allDone=done.size===sections.length;
+  completeBtn.textContent=allDone?'Completed ✓':'Mark Lesson Complete';
+  completeBtn.classList.toggle('done',allDone);
+  setAcademyCompletion(allDone);
+}
+const observer=new IntersectionObserver(entries=>{
+  entries.forEach(entry=>{
+    if(entry.isIntersecting){
+      const id=entry.target.id;
+      links.forEach(link=>link.classList.toggle('active',link.getAttribute('href')==='#'+id));
+    }
+  })
+},{threshold:.2,rootMargin:'-10% 0px -65%'});
+sections.forEach(section=>observer.observe(section));
+
+const completeBtn=document.getElementById('completeBtn');
+completeBtn.onclick=()=>{
+  sections.forEach(section=>done.add(section.id));saveDone();updateProgress();
+};
+
+const recallSelectors='.definition p,.stage p,.stage .risk,.factor li,.clean-list li,.formula strong,.formula span,.metric p,.metric li,.pearl p,.compare-card li,.ratio,.milestone,.objectives li,.dev-card li,.recall-answer';
+document.querySelectorAll(recallSelectors).forEach(el=>{el.classList.add('recall-target');el.addEventListener('click',()=>el.classList.add('revealed'))});
+document.getElementById('recallTool').onclick=function(){document.body.classList.toggle('active-recall');this.classList.toggle('on');document.querySelectorAll('.recall-target').forEach(el=>el.classList.remove('revealed'))};
+
+let collapsed=false;
+document.getElementById('collapseTool').onclick=function(){collapsed=!collapsed;sections.forEach(s=>s.querySelector('.section-body').classList.toggle('collapsed',collapsed));this.textContent=collapsed?'Expand Sections':'Collapse Sections';this.classList.toggle('on',collapsed)};
+document.getElementById('printTool').onclick=()=>window.print();
+
+const search=document.getElementById('lessonSearch');
+search.addEventListener('input',()=>{
+  const q=search.value.trim().toLowerCase();let visible=0;
+  sections.forEach(section=>{const show=!q||section.innerText.toLowerCase().includes(q);section.style.display=show?'':'none';if(show)visible++});
+  document.getElementById('emptySearch').style.display=visible?'none':'block';
+});
+
+const flashcards=[
+  ['Define growth.','Increase in organism size due to an increase in the size and/or number of its constituent cells.'],
+  ['Define development.','Maturation of functions, acquisition of skills and adaptation to stress.'],
+  ['When is birth weight regained?','Usually by day 10; the normal range is 7–14 days.'],
+  ['When does birth weight double, triple and quadruple?','It doubles at 4 months, triples at 1 year and quadruples at 2 years.'],
+  ['Expected weight from 3–12 months?','(Age in months + 9) ÷ 2 kg.'],
+  ['Expected weight from 1–6 years?','(Age in years × 2) + 8 kg.'],
+  ['Expected height from 2–12 years?','(Age in years × 6) + 77 cm.'],
+  ['How does recumbent length compare with standing height?','Recumbent length is about 0.5 cm greater.'],
+  ['What is the US/LS ratio at birth?','Approximately 1.7 : 1.'],
+  ['Carpal ossification centers until age 6?','Number of centers ≈ age in years + 1.'],
+  ['Which centiles are considered abnormal?','Below the 3rd centile or above the 97th centile.'],
+  ['What is needed to calculate growth velocity?','At least two measurements in the same child separated by a known time interval.'],
+  ['Key milestone at 8–9 months?','Sits without support, crawls and babbles “mama” and “dada”.'],
+  ['Key language milestone at 2 years?','Speaks in two-word sentences.'],
+  ['Key milestones at 5 years?','Tells name and address, jumps/hops/skips, gets dressed and counts 10 or more objects.']
+];
+let known={};try{known=JSON.parse(localStorage.getItem(FC_KEY)||'{}')}catch(e){}let fcIndex=0;
+function saveKnown(){try{localStorage.setItem(FC_KEY,JSON.stringify(known))}catch(e){}}
+function renderFC(){
+  const card=document.getElementById('fcCard');card.classList.remove('flipped');
+  document.getElementById('fcFront').textContent=flashcards[fcIndex][0];document.getElementById('fcBack').textContent=flashcards[fcIndex][1];
+  document.getElementById('fcPosition').textContent=(fcIndex+1)+' of '+flashcards.length;
+  document.getElementById('fcStatus').textContent=known[fcIndex]===true?'Known':known[fcIndex]===false?'Still learning':'Not rated';
+  updateStudyMeta();
+}
+document.getElementById('fcCard').onclick=()=>document.getElementById('fcCard').classList.toggle('flipped');
+document.getElementById('fcPrev').onclick=()=>{fcIndex=(fcIndex-1+flashcards.length)%flashcards.length;renderFC()};
+document.getElementById('fcNext').onclick=()=>{fcIndex=(fcIndex+1)%flashcards.length;renderFC()};
+document.getElementById('fcKnow').onclick=()=>{known[fcIndex]=true;saveKnown();renderFC()};
+document.getElementById('fcLearning').onclick=()=>{known[fcIndex]=false;saveKnown();renderFC()};
+document.getElementById('flashcardsTool').onclick=()=>{renderFC();openModal('fcModal')};
+
+const quiz=[
+  {q:'What is the average full-term newborn weight?',o:['2 kg','3 kg','4.5 kg','5 kg'],a:1,e:'The average full-term newborn weight is 3 kg.'},
+  {q:'Birth weight usually doubles at:',o:['2 months','4 months','6 months','12 months'],a:1,e:'Birth weight doubles at 4 months, triples at 1 year and quadruples at 2 years.'},
+  {q:'The expected height formula from 2–12 years is:',o:['Age × 2 + 8','Age × 5 + 80','Age × 6 + 77','Age × 7 − 5'],a:2,e:'Expected height in centimeters is (age in years × 6) + 77.'},
+  {q:'Recumbent length is approximately how much greater than standing height?',o:['0.5 cm','2 cm','5 cm','10 cm'],a:0,e:'Recumbent length is about 0.5 cm more because standing causes joint compression.'},
+  {q:'The upper segment/lower segment ratio at birth is approximately:',o:['1 : 1','1.3 : 1','1.7 : 1','2.5 : 1'],a:2,e:'The ratio is about 1.7 : 1 at birth and approaches 1 : 1 later in childhood.'},
+  {q:'Until age 6, the number of carpal ossification centers is approximately:',o:['Age − 1','Age + 1','Age × 2','Always 8'],a:1,e:'The practical rule is age in years + 1 until age 6.'},
+  {q:'Which condition may be associated with advanced bone age?',o:['Hypothyroidism','Malnutrition','Constitutional delay','Simple obesity'],a:3,e:'Simple obesity is listed among causes of advanced bone age.'},
+  {q:'Which centile values are considered abnormal?',o:['Below 10th only','Above 90th only','Below 3rd or above 97th','Only the 50th'],a:2,e:'Measurements below the 3rd or above the 97th centile require clinical interpretation.'},
+  {q:'Growth velocity requires:',o:['One measurement','Two measurements with a known interval','Only birth weight','Bone age alone'],a:1,e:'At least two measurements in the same child with a known time interval are needed.'},
+  {q:'A typical language milestone at 2 years is:',o:['At least one word','Two-word sentences','Tells name and address','Reads simple words'],a:1,e:'At 2 years, the child typically speaks in two-word sentences.'}
+];
+let quizIndex=0,score=0,answered=false;
+function renderQuiz(){
+  const body=document.getElementById('quizBody');
+  if(quizIndex>=quiz.length){
+    const pct=Math.round(score/quiz.length*100);let best=0;try{best=Number(localStorage.getItem(QUIZ_KEY)||0);if(pct>best)localStorage.setItem(QUIZ_KEY,String(pct))}catch(e){}
+    body.innerHTML='<div class="quiz-result"><span>QUIZ COMPLETE</span><strong>'+score+' / '+quiz.length+'</strong><p>You scored '+pct+'%.</p><button class="quiz-next" id="retryQuiz">Try again</button></div>';
+    document.getElementById('retryQuiz').onclick=startQuiz;updateStudyMeta();return;
+  }
+  const item=quiz[quizIndex];answered=false;
+  body.innerHTML='<div class="quiz-meta"><span>Question '+(quizIndex+1)+' of '+quiz.length+'</span><span>Score '+score+'</span></div><div class="bar"><i style="width:'+((quizIndex/quiz.length)*100)+'%"></i></div><div class="quiz-q">'+item.q+'</div><div id="quizOptions">'+item.o.map((opt,i)=>'<button class="quiz-opt" data-i="'+i+'">'+opt+'</button>').join('')+'</div><div class="quiz-explain" id="quizExplain">'+item.e+'</div><button class="quiz-next" id="quizNext" disabled>'+(quizIndex===quiz.length-1?'See result':'Next question')+'</button>';
+  document.querySelectorAll('.quiz-opt').forEach(btn=>btn.onclick=()=>answerQuiz(Number(btn.dataset.i)));
+  document.getElementById('quizNext').onclick=()=>{quizIndex++;renderQuiz()};
+}
+function answerQuiz(choice){if(answered)return;answered=true;const item=quiz[quizIndex];if(choice===item.a)score++;document.querySelectorAll('.quiz-opt').forEach((btn,i)=>{btn.disabled=true;if(i===item.a)btn.classList.add('correct');else if(i===choice)btn.classList.add('wrong')});document.getElementById('quizExplain').classList.add('show');document.getElementById('quizNext').disabled=false}
+function startQuiz(){quizIndex=0;score=0;renderQuiz()}
+document.getElementById('quizTool').onclick=()=>{startQuiz();openModal('quizModal')};
+
+function openModal(id){document.getElementById(id).classList.add('show');document.body.style.overflow='hidden'}
+function closeModal(id){document.getElementById(id).classList.remove('show');document.body.style.overflow=''}
+document.querySelectorAll('[data-close]').forEach(btn=>btn.onclick=()=>closeModal(btn.dataset.close));
+document.querySelectorAll('.modal-backdrop').forEach(modal=>modal.addEventListener('click',e=>{if(e.target===modal)closeModal(modal.id)}));
+document.addEventListener('keydown',e=>{if(e.key==='Escape')document.querySelectorAll('.modal-backdrop.show').forEach(m=>closeModal(m.id))});
+
+function updateStudyMeta(){
+  let best=0;try{best=Number(localStorage.getItem(QUIZ_KEY)||0)}catch(e){}
+  document.getElementById('bestQuiz').textContent=best?best+'%':'—';
+  document.getElementById('knownCount').textContent=Object.values(known).filter(Boolean).length+' / '+flashcards.length;
+}
+updateProgress();updateStudyMeta();
+</script>
+</body>
+</html>
