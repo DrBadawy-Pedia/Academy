@@ -50,5 +50,8 @@ document.getElementById('recallBtn').addEventListener('click',e=>{const on=docum
 function theme(t){document.documentElement.dataset.theme=t;document.getElementById('themeBtn').textContent=t==='dark'?'☀️ Light':'🌙 Dark';document.getElementById('themeBtnMobile').textContent=t==='dark'?'Light Mode':'Dark Mode';document.getElementById('themeColorMeta').content=t==='dark'?'#10141B':'#16324F';try{localStorage.setItem('dbp_theme',t)}catch(e){}}
 let saved='light';try{saved=localStorage.getItem('dbp_theme')||'light'}catch(e){}theme(saved);['themeBtn','themeBtnMobile'].forEach(id=>document.getElementById(id).addEventListener('click',()=>theme(document.documentElement.dataset.theme==='dark'?'light':'dark')));update();
 </script>
+
+<script src="../assets/firebase-config-dbp.js"></script>
+<script type="module" src="../assets/dbp-auth.js"></script>
 </body>
 </html>

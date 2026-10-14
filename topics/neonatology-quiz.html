@@ -86,5 +86,8 @@ function theme(t){document.documentElement.setAttribute('data-theme',t);try{loca
 let saved='light';try{saved=localStorage.getItem('dbp_theme')||(matchMedia('(prefers-color-scheme: dark)').matches?'dark':'light')}catch(e){}theme(saved);document.getElementById('themeBtn').onclick=()=>theme(document.documentElement.getAttribute('data-theme')==='dark'?'light':'dark');
 loadQuizzes();window.addEventListener('pageshow',()=>{loadQuizzes()});window.addEventListener('storage',()=>{loadQuizzes()});
 </script>
+
+<script src="../assets/firebase-config-dbp.js"></script>
+<script type="module" src="../assets/dbp-auth.js"></script>
 </body>
 </html>
